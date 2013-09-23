@@ -1,0 +1,14 @@
+{
+    "name": "opportunity",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-contrib-copy": "*",
+        "grunt-contrib-concat": "*",
+        "grunt-contrib-stylus": "*",
+        "grunt-contrib-csslint": "*",
+        "grunt-contrib-jshint": "*",
+        "grunt-contrib-uglify": "*"
+    }
+}
