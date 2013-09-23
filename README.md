@@ -1,4 +1,4 @@
-opportunity
-===========
+Opportunity - a Clock App for Firefox OS
+---
 
-A clock Firefox app for study
+It just used to study for the moment:)
