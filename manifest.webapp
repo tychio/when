@@ -1,0 +1,24 @@
+{
+    "version": "0.1",
+    "name": "Opportunity",
+    "launch_path": "index.html",
+    "description": "A timer for your opportunity",
+    "icons": {
+        "16": "",
+        "32": "",
+        "48": "",
+        "64": "",
+        "128": ""
+    },
+    "developer": {
+        "name": "Tyrant Zhang",
+        "url": "http://www.tychio.net"
+    },
+    "installs_allowed_from": ["*"],
+    "default_locale": "en",
+    "permissions": {
+        "desktop-notification": {
+            "description" : "To show notifications"
+        }
+    }
+}

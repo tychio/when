@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# version 0.1
+
+CACHE:
+index.html
+css/style.css
+js/timer.js
+
+NETWORK:
+*
+
+FALLBACK:
+fallback.html
