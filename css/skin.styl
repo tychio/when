@@ -1,0 +1,27 @@
+// variable
+$colorMain = #FF8833
+$colorBg = #FFF7F5
+// layout
+header,main,footer
+    position absolute
+    overflow hidden
+    display block
+    float left
+header
+    z-index 12000
+main
+    z-index 10000
+    width 100%
+    height 100%
+    background $colorBg
+    section
+        padding 10%
+        &.time-cycle
+            width 80%
+        &.time-text
+            text-align center
+            font-size 2rem
+            span
+                color $colorMain
+footer
+    z-index 11000

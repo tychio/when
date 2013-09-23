@@ -1,0 +1,18 @@
+fontFace(p_name, p_weight)
+    @font-face 
+        font-family: 'mozTT'
+        src: url(p_name) format('woff')
+        font-weight: p_weight
+        font-style: normal
+fontFace('../font/moztt_regular-webfont.woff', normal)
+fontFace('../font/moztt_light-webfont.woff', 300)
+fontFace('../font/moztt_medium-webfont.woff', 500)
+
+html,body
+    height 100%
+    width 100%
+    padding 0
+    margin 0
+    font 300 16px mozTT
+h1,h2,h3,h4,h5,h6
+    margin 0
