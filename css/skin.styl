@@ -1,6 +1,35 @@
 // variable
-$colorMain = #FF8833
-$colorBg = #FFF7F5
+$colorMain = #ff4e00
+$colorLightenBg = #f4f4f4
+$colorDarkenBg = #4d4d4d
+$colorSeconds = #ff6600
+$colorMinutes = #f39955
+$colorHours = #f1cc99
+// function
+shadow(p_attr)
+    -webkit-box-shadow p_attr
+    -moz-box-shadow p_attr
+    -ms-box-shadow p_attr
+    -o-box-shadow p_attr
+    box-shadow p_attr
+transform(p_attr, p_origin)
+    -webkit-transform p_attr
+    -moz-transform p_attr
+    -ms-transform p_attr
+    -o-transform p_attr
+    transform p_attr
+    -webkit-transform-origin p_origin
+    -moz-transform-origin p_origin
+    -ms-transform-origin p_origin
+    -o-transform-origin p_origin
+    transform-origin p_origin
+radius(p_radius)
+    -webkit-border-radius p_radius
+    -moz-border-radius p_radius
+    -ms-border-radius p_radius
+    -o-border-radius p_radius
+    border-radius p_radius
+
 // layout
 header,main,footer
     position absolute
@@ -13,12 +42,59 @@ main
     z-index 10000
     width 100%
     height 100%
-    background $colorBg
+    background $colorLightenBg
+    &.darken
+        background $colorDarkenBg
     section
-        padding 10%
-        &.time-cycle
+        position relative
+        overflow hidden
+        padding 0 10%
+        &.time-plate
+            height 40%
             width 80%
+            margin-top 10%
+            .time-cycle
+                float left
+                shadow(0 0 10px #888, inset 0 0 5px #333)
+                overflow hidden
+                position absolute
+                float left
+                height 200px
+                width 200px
+                margin -100px
+                top 50%
+                left 50%
+                background #666
+                radius(50%)
+                .time-point
+                    position absolute
+                    height 500px
+                    width 100px
+                    left 50%
+                    bottom 50%
+                    transform(rotate(-85deg) skew(-80deg), left bottom)
+                    &.point_second
+                        background $colorSeconds
+                        z-index 30
+                    &.point_minute
+                        background $colorMinutes
+                        z-index 20
+                    &.point_hour
+                        background $colorHours
+                        z-index 10
+                .time-panel
+                    overflow hidden
+                    position absolute
+                    height 180px
+                    width 180px
+                    top 10px
+                    left 10px
+                    z-index 100
+                    shadow(inset 0 0 10px #c1c4c1)
+                    background #f2f3f2
+                    radius(90px)
         &.time-text
+            padding 5% 10%
             text-align center
             font-size 2rem
             span

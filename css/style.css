@@ -10,9 +10,16 @@ h1,h2,h3,h4,h5,h6{margin:0}
 
 header,main,footer{position:absolute;overflow:hidden;display:block;float:left}
 header{z-index:12000}
-main{z-index:10000;width:100%;height:100%;background:#fff7f5;}
-main section{padding:10%;}
-main section.time-cycle{width:80%}
-main section.time-text{text-align:center;font-size:2rem;}
-main section.time-text span{color:#f83}
+main{z-index:10000;width:100%;height:100%;background:#f4f4f4;}
+main.darken{background:#4d4d4d}
+main section{position:relative;overflow:hidden;padding:0 10%;}
+main section.time-plate{height:40%;width:80%;margin-top:10%;}
+main section.time-plate .time-cycle{float:left;-webkit-box-shadow:0 0 10px #888;-moz-box-shadow:0 0 10px #888;-ms-box-shadow:0 0 10px #888;-o-box-shadow:0 0 10px #888;box-shadow:0 0 10px #888;overflow:hidden;position:absolute;float:left;height:200px;width:200px;margin:-100px;top:50%;left:50%;background:#666;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;-o-border-radius:50%;border-radius:50%;}
+main section.time-plate .time-cycle .time-point{position:absolute;height:500px;width:100px;left:50%;bottom:50%;-webkit-transform:rotate(-85deg) skew(-80deg);-moz-transform:rotate(-85deg) skew(-80deg);-ms-transform:rotate(-85deg) skew(-80deg);-o-transform:rotate(-85deg) skew(-80deg);transform:rotate(-85deg) skew(-80deg);-webkit-transform-origin:left bottom;-moz-transform-origin:left bottom;-ms-transform-origin:left bottom;-o-transform-origin:left bottom;transform-origin:left bottom;}
+main section.time-plate .time-cycle .time-point.point_second{background:#f60;z-index:30}
+main section.time-plate .time-cycle .time-point.point_minute{background:#f39955;z-index:20}
+main section.time-plate .time-cycle .time-point.point_hour{background:#f1cc99;z-index:10}
+main section.time-plate .time-cycle .time-panel{overflow:hidden;position:absolute;height:180px;width:180px;top:10px;left:10px;z-index:100;-webkit-box-shadow:inset 0 0 10px #c1c4c1;-moz-box-shadow:inset 0 0 10px #c1c4c1;-ms-box-shadow:inset 0 0 10px #c1c4c1;-o-box-shadow:inset 0 0 10px #c1c4c1;box-shadow:inset 0 0 10px #c1c4c1;background:#f2f3f2;-webkit-border-radius:90px;-moz-border-radius:90px;-ms-border-radius:90px;-o-border-radius:90px;border-radius:90px}
+main section.time-text{padding:5% 10%;text-align:center;font-size:2rem;}
+main section.time-text span{color:#ff4e00}
 footer{z-index:11000}

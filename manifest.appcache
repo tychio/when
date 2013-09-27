@@ -1,10 +1,13 @@
 CACHE MANIFEST
-# version 0.1
-
+# version 0.1.1
+# Fri Sep 27 2013 17:36:03 GMT+0800
 CACHE:
 index.html
 css/style.css
 js/timer.js
+font/moztt_regular-webfont.woff
+font/moztt_medium-webfont.woff
+font/moztt_light-webfont.woff
 
 NETWORK:
 *
