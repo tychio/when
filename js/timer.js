@@ -31,6 +31,7 @@
             hour: p_hours + p_minutes / 60
         });
     }
+    // setting the clock plate include second,minute and hour pointer.
     function setTimePlate (p_time) {
         var selector = {
             second: '.point_second',
@@ -40,6 +41,13 @@
         _setTimePoint(p_time.second, SECOND_WIDTH, selector.second, 60);
         _setTimePoint(p_time.minute, MINUTE_WIDTH, selector.minute, 60);
         _setTimePoint(p_time.hour, HOUR_WIDTH, selector.hour, 12);
+        /**
+         * setting a pointer rotate for webkit and moz
+         * @param p_time a value for the pointer.
+         * @param p_width the pointer's width
+         * @param p_selector the pointer selector
+         * @param p_scope units amount to the scope in cycle.
+        **/
         function _setTimePoint (p_time, p_width, p_selector, p_scope) {
             var rotate = p_time*(360/p_scope) - 90 + p_width*0.5;
             var skew = p_width - 90;
@@ -51,6 +59,7 @@
             }
         }
     }
+    // setting clock text include am or pm,second,minute and hour.
     function setTimeText (p_time) {
         var selector = {
             meridiem:         '.time_meridiem',
@@ -58,10 +67,15 @@
             minute:           '.time_minute',
             second:           '.time_second'
         };
-        _setTimeValue(selector.meridiem, p_time.meridiem ? 'AM' : 'PM');
+        _setTimeValue(selector.meridiem, p_time.meridiem ? 'PM' : 'AM');
         _setTimeValue(selector.hour, coverage(p_time.hour));
         _setTimeValue(selector.minute, coverage(p_time.minute));
         _setTimeValue(selector.second, coverage(p_time.second));
+        /**
+         * setting the text for clock
+         * @param p_selector the prefix could be '.' and '#'
+         * @param p_value the value would be text.
+        **/
         function _setTimeValue (p_selector, p_value) {
             document.querySelector(p_selector).innerHTML = p_value;
         }
