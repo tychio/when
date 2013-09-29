@@ -11,7 +11,7 @@ Just look at the time in moment.
 
 #### Get the Clock ####
 
-I still doing test and build. Visiting [this app](http://www.tychio.net/opportuniry) and click add to screen on your mobile browers.
+I still doing test and build. Visiting [this app](http://www.tychio.net/opportunity/) and click add to screen on your mobile browers.
 
 #### My Goal ####
 
