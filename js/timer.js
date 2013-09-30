@@ -22,7 +22,7 @@
             second: p_seconds,
             minute: p_minutes,
             hour: p_hours % 12,
-            meridiem: p_hours > 12
+            meridiem: p_hours >= 12
         });
         // plate part
         setTimePlate({
