@@ -7,6 +7,7 @@ $colorMinutes = #f39955
 $colorHours = #f1cc99
 $sizeClock = 200px
 $sizeShadow = 10px
+$sizePlate = 80%
 // function
 shadow(p_attr)
     -webkit-box-shadow p_attr
@@ -49,13 +50,10 @@ main
         background $colorDarkenBg
     section
         position relative
-        overflow hidden
         padding 0 10%
         &.time-plate
-            height 40%
-            min-height $sizeClock*1.1 + $sizeShadow*2
+            height $sizePlate
             width 80%
-            margin-top 10%
             .time-cycle
                 float left
                 shadow(0 0 $sizeShadow #888, inset 0 0 $sizeShadow*.5 #333)
@@ -97,7 +95,7 @@ main
                     background #f2f3f2
                     radius($sizeClock*.45)
         &.time-text
-            padding 5% 10%
+            height 100% - $sizePlate
             text-align center
             font-size 2rem
             span
