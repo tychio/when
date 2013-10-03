@@ -1,10 +1,10 @@
 // variable
-$colorMain = #ff4e00
-$colorLightenBg = #f4f4f4
-$colorDarkenBg = #4d4d4d
-$colorSeconds = #ff6600
-$colorMinutes = #f39955
-$colorHours = #f1cc99
+$colorLightText = #ff9500
+$colorLightBg = #f4f4f4
+$colorLightPointer = #e66000
+$colorDarkText = #0095dd
+$colorDarkBg = #4d4e53
+$colorDarkPointer = #00539f
 $sizeClock = 200px
 $sizeShadow = 10px
 $sizePlate = 80%
@@ -45,9 +45,7 @@ main
     z-index 10000
     width 100%
     height 100%
-    background $colorLightenBg
-    &.darken
-        background $colorDarkenBg
+    background $colorLightBg
     section
         position relative
         padding 0 10%
@@ -65,7 +63,7 @@ main
                 margin 0 - $sizeClock*.5
                 top 50%
                 left 50%
-                background #666
+                background $colorDarkBg
                 radius(50%)
                 .time-point
                     position absolute
@@ -75,13 +73,13 @@ main
                     bottom 50%
                     transform(rotate(-85deg) skew(-80deg), left bottom)
                     &.point_second
-                        background $colorSeconds
+                        background $colorLightPointer
                         z-index 30
                     &.point_minute
-                        background $colorMinutes
+                        background lighten($colorLightPointer, 40%)
                         z-index 20
                     &.point_hour
-                        background $colorHours
+                        background lighten($colorLightPointer, 80%)
                         z-index 10
                 .time-panel
                     overflow hidden
@@ -92,13 +90,28 @@ main
                     left $sizeClock*.05
                     z-index 100
                     shadow(inset 0 0 $sizeShadow #c1c4c1)
-                    background #f2f3f2
+                    background $colorLightBg
                     radius($sizeClock*.45)
         &.time-text
             height 100% - $sizePlate
             text-align center
             font-size 2rem
             span
-                color $colorMain
+                color $colorLightText
+    &.dark
+        background $colorDarkBg
+        section.time-text span
+            color $colorDarkText
+        section.time-plate .time-cycle
+            background $colorLightBg
+            .time-panel
+                background $colorDarkBg
+            .time-point
+                &.point_second
+                    background $colorDarkPointer
+                &.point_minute
+                    background lighten($colorDarkPointer, 40%)
+                &.point_hour
+                    background lighten($colorDarkPointer, 80%)
 footer
     z-index 11000

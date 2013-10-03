@@ -97,4 +97,29 @@
         }
         return p_number.slice(0 - p_size);
     }
+    // action bind
+    // turn on/off light
+    toggleLight();
+    function toggleLight () {
+        _checkLight(); // first checking
+        // turn on/off
+        document.querySelector('.time-panel')
+        .addEventListener('click', function () {
+            if (localStorage.turn === 'off') {
+                localStorage.turn = 'on';
+            } else {
+                localStorage.turn = 'off';
+            }
+            _checkLight();
+        }, false);
+        function _checkLight () {
+            var _mainDom = document.querySelector('main');
+            var _TURNOFF_CLASS = 'dark';
+            if (localStorage.turn !== 'off') {// turn on
+                _mainDom.classList.remove(_TURNOFF_CLASS);
+            } else {// turn off
+                _mainDom.classList.add(_TURNOFF_CLASS);
+            }
+        }
+    }
 })();
