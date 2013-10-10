@@ -14,6 +14,8 @@
         var hours = time.getHours();
         var milliseconds = time.getMilliseconds();
         setTimer(milliseconds, seconds, minutes, hours);
+        // output datetime
+        document.querySelector('time').setAttribute('datetime', time.toLocaleString());
     }
     // set text and plate
     function setTimer (p_milliseconds, p_seconds, p_minutes, p_hours) {
