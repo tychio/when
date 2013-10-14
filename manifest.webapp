@@ -1,7 +1,7 @@
 {
     "version": "0.1",
     "name": "Opportunity",
-    "launch_path": "index.html",
+    "launch_path": "/opportunity/",
     "description": "A timer for your opportunity",
     "icons": {
         "30": "img/icon_30.png",
