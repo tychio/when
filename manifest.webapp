@@ -4,11 +4,11 @@
     "launch_path": "index.html",
     "description": "A timer for your opportunity",
     "icons": {
-        "16": "",
-        "32": "",
-        "48": "",
-        "64": "",
-        "128": ""
+        "16": "img/icon_16.png",
+        "32": "img/icon_32.png",
+        "48": "img/icon_48.png",
+        "64": "img/icon_60.png",
+        "128": "img/icon_60.png"
     },
     "developer": {
         "name": "Tyrant Zhang",
