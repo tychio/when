@@ -1,11 +1,11 @@
 {
     "version": "0.1",
     "name": "Opportunity",
-    "launch_path": "/opportunity/",
+    "launch_path": "/opportunity/index.html",
     "description": "A timer for your opportunity",
     "icons": {
-        "30": "img/icon_30.png",
-        "60": "img/icon_60.png"
+        "30": "/opportunity/img/icon_30.png",
+        "60": "/opportunity/img/icon_60.png"
     },
     "developer": {
         "name": "Tyrant Zhang",
