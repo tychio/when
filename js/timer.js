@@ -9,16 +9,17 @@
     var timer = setInterval(tricle, ACCURACY);
     function tricle () {
         var time = new Date();
+        var milliseconds = time.getMilliseconds();
         var seconds = time.getSeconds();
         var minutes = time.getMinutes();
         var hours = time.getHours();
-        var milliseconds = time.getMilliseconds();
-        setTimer(milliseconds, seconds, minutes, hours);
+        var month = time.getMonth();
+        setTimer(milliseconds, seconds, minutes, hours, month);
         // output datetime
         document.querySelector('time').setAttribute('datetime', time.toLocaleString());
     }
     // set text and plate
-    function setTimer (p_milliseconds, p_seconds, p_minutes, p_hours) {
+    function setTimer (p_milliseconds, p_seconds, p_minutes, p_hours, p_months) {
         // text part
         setTimeText({
             second: p_seconds,
@@ -31,6 +32,11 @@
             second: p_seconds + p_milliseconds / 1000,
             minute: p_minutes + p_seconds / 60,
             hour: p_hours + p_minutes / 60
+        });
+        // color
+        setSkyColor({
+            hour: p_hours,
+            month: p_months
         });
     }
     // setting the clock plate include second,minute and hour pointer.
@@ -82,6 +88,25 @@
             document.querySelector(p_selector).innerHTML = p_value;
         }
     }
+    // setting sky color such as background and text color.
+    function setSkyColor (p_time) {
+        var sunrise = 8;
+        var sunset = 18;
+        if (_atTimeZone(p_time.month), 3, 11) {// summer
+            sunrise = 6;
+            sunset = 20;
+        }
+        var mainDOM = document.querySelector('main');
+        var NIGHT_CLASS = 'dark';
+        if (_atTimeZone(p_time.hour, sunrise, sunset)) {// daytime
+            mainDOM.classList.remove(NIGHT_CLASS);
+        } else {// night
+            mainDOM.classList.add(NIGHT_CLASS);
+        }
+        function _atTimeZone (p_time, p_start, p_end) {
+            return (p_time - p_start)*(p_end - p_time) > 0;
+        }
+    }
     /**
      * complement digits
      * @param p_number[number] the number to be processed.
@@ -98,30 +123,5 @@
             p_number = '0' + p_number;
         }
         return p_number.slice(0 - p_size);
-    }
-    // action bind
-    // turn on/off light
-    toggleLight();
-    function toggleLight () {
-        _checkLight(); // first checking
-        // turn on/off
-        document.querySelector('.time-panel')
-        .addEventListener('click', function () {
-            if (localStorage.turn === 'off') {
-                localStorage.turn = 'on';
-            } else {
-                localStorage.turn = 'off';
-            }
-            _checkLight();
-        }, false);
-        function _checkLight () {
-            var _mainDom = document.querySelector('main');
-            var _TURNOFF_CLASS = 'dark';
-            if (localStorage.turn !== 'off') {// turn on
-                _mainDom.classList.remove(_TURNOFF_CLASS);
-            } else {// turn off
-                _mainDom.classList.add(_TURNOFF_CLASS);
-            }
-        }
     }
 })();

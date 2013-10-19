@@ -7,7 +7,9 @@ $colorDarkBg = #4d4e53
 $colorDarkPointer = #00539f
 $sizeClock = 200px
 $sizeShadow = 10px
+$sizeAlarm = 1px
 $sizePlate = 80%
+$timeAlternate = 2s
 // function
 shadow(p_attr)
     -webkit-box-shadow p_attr
@@ -32,6 +34,12 @@ radius(p_radius)
     -ms-border-radius p_radius
     -o-border-radius p_radius
     border-radius p_radius
+transition(p_target, p_second)
+    -webkit-transition p_target p_second
+    -moz-transition p_target p_second
+    -ms-transition p_target p_second
+    -o-transition p_target p_second
+    transition p_target p_second
 
 // layout
 header,main,footer
@@ -46,6 +54,7 @@ main
     width 100%
     height 100%
     background $colorLightBg
+    transition background $timeAlternate
     section
         position relative
         padding 0 10%
@@ -54,7 +63,6 @@ main
             width 80%
             .time-cycle
                 float left
-                shadow(0 0 $sizeShadow #888, inset 0 0 $sizeShadow*.5 #333)
                 overflow hidden
                 position absolute
                 float left
@@ -64,14 +72,17 @@ main
                 top 50%
                 left 50%
                 background $colorDarkBg
-                radius(50%)
+                shadow 0 0 $sizeShadow #888, inset 0 0 $sizeShadow*.5 #333
+                radius 50%
+                transition background $timeAlternate
                 .time-point
                     position absolute
                     height 500px
                     width 100px
                     left 50%
                     bottom 50%
-                    transform(rotate(-85deg) skew(-80deg), left bottom)
+                    transform rotate(-85deg) skew(-80deg), left bottom
+                    transition background $timeAlternate
                     &.point_second
                         background $colorLightPointer
                         z-index 30
@@ -89,15 +100,28 @@ main
                     top $sizeClock*.05
                     left $sizeClock*.05
                     z-index 100
-                    shadow(inset 0 0 $sizeShadow #c1c4c1)
+                    shadow inset 0 0 $sizeShadow #c1c4c1
                     background $colorLightBg
-                    radius($sizeClock*.45)
+                    radius $sizeClock*.45
+                    transition background $timeAlternate
+                .time-alarm
+                    position absolute
+                    top 0
+                    left $sizeClock*.5 - 0.5px
+                    z-index 101
+                    display none
+                    height $sizeClock*.5
+                    width $sizeAlarm
+                    transform rotate(0) skew(0), left bottom
+                    background $colorDarkBg
+                    transition background $timeAlternate
         &.time-text
             height 100% - $sizePlate
             text-align center
             font-size 2rem
             span
                 color $colorLightText
+                transition color $timeAlternate
     &.dark
         background $colorDarkBg
         section.time-text span
@@ -113,5 +137,7 @@ main
                     background lighten($colorDarkPointer, 40%)
                 &.point_hour
                     background lighten($colorDarkPointer, 80%)
+            .time-alarm
+                background $colorLightBg
 footer
     z-index 11000
