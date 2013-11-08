@@ -92,7 +92,7 @@
     function setSkyColor (p_time) {
         var sunrise = 8;
         var sunset = 18;
-        if (_atTimeZone(p_time.month), 3, 11) {// summer
+        if (_atTimeZone(p_time.month, 3, 11)) {// summer
             sunrise = 6;
             sunset = 20;
         }
