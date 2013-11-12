@@ -4,6 +4,7 @@ module.exports = function (grunt) {
         'index.html',
         'js/update.js',
         'js/timer.js',
+        'js/alarm.js',
         'css/style.css',
         'font/moztt_regular-webfont.woff',
         'font/moztt_medium-webfont.woff',
