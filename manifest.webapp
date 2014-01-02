@@ -8,6 +8,11 @@
         "60": "img/icon_60.png",
         "128": "img/icon_60.png"
     },
+    "permissions": {
+        "alarms": {
+            "description": "Schedule a notification, or schedule an application to be started."
+        }
+    },
     "developer": {
         "name": "Tyrant Zhang",
         "url": "http://www.tychio.net"
