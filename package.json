@@ -10,6 +10,7 @@
         "grunt-contrib-csslint": "*",
         "grunt-contrib-jshint": "*",
         "grunt-contrib-uglify": "*",
+        "grunt-contrib-jasmine": "*",
         "grunt-manifest": "*"
     }
 }

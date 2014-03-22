@@ -19,6 +19,13 @@ module.exports = function (grunt) {
             cache: {
                 files: cacheFilesArr,
                 tasks: 'manifest'
+            },
+            pivotal: {
+                files: [
+                    'unit/*Spec.js',
+                    'js/*.js'
+                ],
+                tasks: 'jasmine'
             }
         },
         stylus: {
@@ -49,11 +56,21 @@ module.exports = function (grunt) {
                 src: cacheFilesArr,
                 dist: 'manifest.appcache'
             }
+        },
+        jasmine: {
+            src: 'js/timer.js',
+            options: {
+                keepRunner: true,
+                outfile: 'unit/runner.html',
+                specs: 'unit/*Spec.js'
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-stylus');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-manifest');
 
+    grunt.registerTask('test', ['jasmine', 'watch']);
     grunt.registerTask('default', ['stylus', 'manifest', 'watch']);
 };
