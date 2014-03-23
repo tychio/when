@@ -25,7 +25,7 @@ window.Timer = (function (undefined) {
             setTimeText({
                 second: p_seconds,
                 minute: p_minutes,
-                hour: p_hours % 12,
+                hour: p_hours > 12 ? p_hours % 12 : p_hours,
                 meridiem: p_hours >= 12
             });
             // plate part

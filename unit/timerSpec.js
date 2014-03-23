@@ -48,30 +48,67 @@ describe('Timer', function () {
             now.hours = 2;
         });
 
-        it('for meridiem at morning', function () {
-            var meridiem = elementFactory();
-            spyOnSelector('.time_meridiem', meridiem);
-            now.hours = 11;
-            spyOnTime(now);
+        describe('meridiem', function () {
+            var meridiem;
 
-            Timer();
+            beforeEach(function () {
+                meridiem = elementFactory();
+                spyOnSelector('.time_meridiem', meridiem);
+            });
 
-            jasmine.clock().tick(41);
+            it('should display AM at morning', function () {
+                now.hours = 11;
+                spyOnTime(now);
+                Timer();
+                jasmine.clock().tick(40);
 
-            expect(meridiem.innerHTML).toBe('AM');
+                expect(meridiem.innerHTML).toBe('AM');
+            });
+
+            it('should display PM at evening', function () {
+                now.hours = 12;
+                spyOnTime(now);
+                Timer();
+                jasmine.clock().tick(40);
+
+                expect(meridiem.innerHTML).toBe('PM');
+            });
+
         });
+        describe('hours', function () {
+            var hour;
 
-        it('for meridiem at evening', function () {
-            var meridiem = elementFactory();
-            spyOnSelector('.time_meridiem', meridiem);
-            now.hours = 12;
-            spyOnTime(now);
+            beforeEach(function () {
+                hour = elementFactory();
+                spyOnSelector('.time_hour', hour);
+            });
 
-            Timer();
+            it('for hours at midnight', function () {
+                now.hours = 0;
+                spyOnTime(now);
+                Timer();
+                jasmine.clock().tick(40);
 
-            jasmine.clock().tick(41);
+                expect(hour.innerHTML).toBe('00');
+            });
 
-            expect(meridiem.innerHTML).toBe('PM');
+            it('for hours at forenoon', function () {
+                now.hours = 12;
+                spyOnTime(now);
+                Timer();
+                jasmine.clock().tick(40);
+
+                expect(hour.innerHTML).toBe('12');
+            });
+
+            it('for hours at evening', function () {
+                now.hours = 20;
+                spyOnTime(now);
+                Timer();
+                jasmine.clock().tick(40);
+
+                expect(hour.innerHTML).toBe('08');
+            });
         });
     });
 });
