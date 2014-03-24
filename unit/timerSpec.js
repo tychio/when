@@ -83,7 +83,7 @@ describe('Timer', function () {
                 spyOnSelector('.time_hour', hour);
             });
 
-            it('for hours at midnight', function () {
+            it('should be zero at midnight', function () {
                 now.hours = 0;
                 spyOnTime(now);
                 Timer();
@@ -92,7 +92,7 @@ describe('Timer', function () {
                 expect(hour.innerHTML).toBe('00');
             });
 
-            it('for hours at forenoon', function () {
+            it('should be twelve at forenoon', function () {
                 now.hours = 12;
                 spyOnTime(now);
                 Timer();
@@ -101,13 +101,40 @@ describe('Timer', function () {
                 expect(hour.innerHTML).toBe('12');
             });
 
-            it('for hours at evening', function () {
+            it('should be less than twelve at evening', function () {
                 now.hours = 20;
                 spyOnTime(now);
                 Timer();
                 jasmine.clock().tick(40);
 
                 expect(hour.innerHTML).toBe('08');
+            });
+        });
+
+        describe('minutes', function () {
+            var minute;
+
+            beforeEach(function () {
+                minute = elementFactory();
+                spyOnSelector('.time_minute', minute);
+            });
+
+            it('should display number', function () {
+                now.minutes = 59;
+                spyOnTime(now);
+                Timer();
+                jasmine.clock().tick(40);
+
+                expect(minute.innerHTML).toBe('59');
+            });
+
+            it('should be zeroizing to double digit', function () {
+                now.minutes = 9;
+                spyOnTime(now);
+                Timer();
+                jasmine.clock().tick(40);
+
+                expect(minute.innerHTML).toBe('09');
             });
         });
     });
