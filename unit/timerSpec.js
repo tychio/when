@@ -137,5 +137,32 @@ describe('Timer', function () {
                 expect(minute.innerHTML).toBe('09');
             });
         });
+
+        describe('seconds', function () {
+            var second;
+
+            beforeEach(function () {
+                second = elementFactory();
+                spyOnSelector('.time_second', second);
+            });
+
+            it('should display number', function () {
+                now.seconds = 59;
+                spyOnTime(now);
+                Timer();
+                jasmine.clock().tick(40);
+
+                expect(second.innerHTML).toBe('59');
+            });
+
+            it('should be zeroizing to double digit', function () {
+                now.seconds = 9;
+                spyOnTime(now);
+                Timer();
+                jasmine.clock().tick(40);
+
+                expect(second.innerHTML).toBe('09');
+            });
+        });
     });
 });
