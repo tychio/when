@@ -57,7 +57,8 @@ describe('Timer', function () {
             it('should display AM at morning', function () {
                 now.hours = 11;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(meridiem.innerHTML).toBe('AM');
@@ -66,7 +67,8 @@ describe('Timer', function () {
             it('should display PM at evening', function () {
                 now.hours = 12;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(meridiem.innerHTML).toBe('PM');
@@ -88,7 +90,8 @@ describe('Timer', function () {
             it('should be zero at midnight', function () {
                 now.hours = 0;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(hour.innerHTML).toBe('00');
@@ -97,7 +100,8 @@ describe('Timer', function () {
             it('should be twelve at forenoon', function () {
                 now.hours = 12;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(hour.innerHTML).toBe('12');
@@ -106,7 +110,8 @@ describe('Timer', function () {
             it('should be less than twelve at evening', function () {
                 now.hours = 20;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(hour.innerHTML).toBe('08');
@@ -128,7 +133,8 @@ describe('Timer', function () {
             it('should display number', function () {
                 now.minutes = 59;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(minute.innerHTML).toBe('59');
@@ -137,7 +143,8 @@ describe('Timer', function () {
             it('should be zeroizing to double digit', function () {
                 now.minutes = 9;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(minute.innerHTML).toBe('09');
@@ -159,7 +166,8 @@ describe('Timer', function () {
             it('should display number', function () {
                 now.seconds = 59;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(second.innerHTML).toBe('59');
@@ -168,7 +176,8 @@ describe('Timer', function () {
             it('should be zeroizing to double digit', function () {
                 now.seconds = 9;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(second.innerHTML).toBe('09');
@@ -201,7 +210,8 @@ describe('Timer', function () {
             });
 
             it('should fix webkit, moz and standard', function () {
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.hour.style['-webkit-transform']).toBeDefined();
@@ -212,7 +222,8 @@ describe('Timer', function () {
             it('should be correct rotate and skew when 0 o clock', function () {
                 now.hours = 0;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.hour.style.transform).toEqual('rotate(-75deg) skew(-60deg)');
@@ -222,7 +233,8 @@ describe('Timer', function () {
                 now.hours = 0;
                 now.minutes = 1;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.hour.style.transform).toEqual('rotate(-74.5deg) skew(-60deg)');
@@ -231,7 +243,8 @@ describe('Timer', function () {
             it('should be correct rotate and skew when 24 o clock', function () {
                 now.hours = 24;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.hour.style.transform).toEqual('rotate(645deg) skew(-60deg)');
@@ -248,7 +261,8 @@ describe('Timer', function () {
             });
 
             it('should fix webkit, moz and standard', function () {
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.minute.style['-webkit-transform']).toBeDefined();
@@ -259,7 +273,8 @@ describe('Timer', function () {
             it('should be correct rotate and skew when 0 minutes', function () {
                 now.minutes = 0;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.minute.style.transform).toEqual('rotate(-85deg) skew(-80deg)');
@@ -269,7 +284,8 @@ describe('Timer', function () {
                 now.minutes = 0;
                 now.seconds = 1;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.minute.style.transform).toEqual('rotate(-84.9deg) skew(-80deg)');
@@ -278,7 +294,8 @@ describe('Timer', function () {
             it('should be correct rotate and skew when 60 minutes', function () {
                 now.minutes = 60;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.minute.style.transform).toEqual('rotate(275deg) skew(-80deg)');
@@ -295,7 +312,8 @@ describe('Timer', function () {
             });
 
             it('should fix webkit, moz and standard', function () {
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.second.style['-webkit-transform']).toBeDefined();
@@ -306,7 +324,8 @@ describe('Timer', function () {
             it('should be correct rotate and skew when 0 seconds', function () {
                 now.seconds = 0;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.second.style.transform).toEqual('rotate(-88deg) skew(-86deg)');
@@ -316,7 +335,8 @@ describe('Timer', function () {
                 now.seconds = 0;
                 now.milliseconds = 1;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.second.style.transform).toEqual('rotate(-87.994deg) skew(-86deg)');
@@ -325,7 +345,8 @@ describe('Timer', function () {
             it('should be correct rotate and skew when 60 seconds', function () {
                 now.seconds = 60;
                 spyOnTime(now);
-                Timer();
+                var timer = Timer();
+                timer.start();
                 jasmine.clock().tick(40);
 
                 expect(pointer.second.style.transform).toEqual('rotate(272deg) skew(-86deg)');

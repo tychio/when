@@ -1,13 +1,32 @@
 window.Timer = (function (undefined) {
     "use strict";
+    var PREFIXS = ['', 'moz', 'webkit'];
+    var timer;
     return function () {
-        var SECOND_WIDTH = 4; // deg
-        var MINUTE_WIDTH = 10; // deg
-        var HOUR_WIDTH = 30; // deg
-        var ACCURACY = 40; //ms
-        var PREFIXS = ['', 'moz', 'webkit']; // browers
-        // run
-        var timer = setInterval(tricle, ACCURACY);
+        var options = {
+            widthSecond: 4, //deg
+            widthMinute: 10,
+            widthHour: 30,
+            accuracy: 40 //ms
+        };
+
+        var api = {
+            start: startTricle,
+            stop: stopTricle
+        };
+
+        function startTricle () {
+            timer = setInterval(tricle, options.accuracy);
+
+            return api;
+        }
+
+        function stopTricle () {
+            clearInterval(timer);
+
+            return api;
+        }
+
         function tricle () {
             var time = new Date();
             var milliseconds = time.getMilliseconds();
@@ -47,9 +66,9 @@ window.Timer = (function (undefined) {
                 minute: '.point_minute',
                 hour: '.point_hour'
             };
-            _setTimePoint(p_time.second, SECOND_WIDTH, selector.second, 60);
-            _setTimePoint(p_time.minute, MINUTE_WIDTH, selector.minute, 60);
-            _setTimePoint(p_time.hour, HOUR_WIDTH, selector.hour, 12);
+            _setTimePoint(p_time.second, options.widthSecond, selector.second, 60);
+            _setTimePoint(p_time.minute, options.widthMinute, selector.minute, 60);
+            _setTimePoint(p_time.hour, options.widthHour, selector.hour, 12);
             /**
              * setting a pointer rotate for webkit and moz
              * @param p_time a value for the pointer.
@@ -125,5 +144,7 @@ window.Timer = (function (undefined) {
             }
             return p_number.slice(0 - p_size);
         }
+
+        return api;
     }
 })();
