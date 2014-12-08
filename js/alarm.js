@@ -1,6 +1,8 @@
 (function (undefined) {
     "use strict";
-    // drag the alarm pointer
+    var options = {
+        endRotate: _setAlarm
+    };
     var touch = false;
 
     var panel = document.querySelector('.time-panel');
@@ -10,18 +12,18 @@
 
     var ALARM_NAME = 'only_alarm';
 
-    panel.addEventListener('touchstart', _startAlarm, false);
-    main.addEventListener('touchmove', _rotateAlarm, false);
-    main.addEventListener('touchend', _endAlarm, false);
-    main.addEventListener('touchcancel', _endAlarm, false);
+    panel.addEventListener('touchstart', _toSet, false);
+    main.addEventListener('touchmove', _rotate, false);
+    main.addEventListener('touchend', _set, false);
+    main.addEventListener('touchcancel', _set, false);
     // start touch the clock panel for start to set a alarm time.
-    function _startAlarm (p_event) {
+    function _toSet (p_event) {
         p_event.preventDefault();
         touch = true;
         alarmPointer.style.display = 'block';
     }
     // to rotate the alarm pointer on move touch.
-    function _rotateAlarm (p_event) {
+    function _rotate (p_event) {
         p_event.preventDefault();
         if (touch) {
             var touchPos = p_event.touches[0];
@@ -43,28 +45,33 @@
         }
     }
     // end or cancel touch the clock panel to set a time for alarm.
-    function _endAlarm (p_event) {
+    function _set (p_event) {
         p_event.preventDefault();
         touch = false;
         alarmPointer.style.display = 'none';
         var _transform = alarmPointer.style.transform;
         var _rotate = /(rotate[\s]*\()([\d.]+)/.exec(_transform);
         if (_rotate && _rotate[2]) {
-            var _alarmTime = new Date();
-            var _alarmSeconds = (_rotate[2]/360 + 1)*12*60*60*1000;
-            _alarmTime.setHours(0);
-            _alarmTime.setMinutes(0);
-            _alarmTime.setSeconds(0);
-            _alarmTime.setMilliseconds(_alarmSeconds);
-            if (_alarmTime.getTime() < (new Date()).getTime()) {// past time
-                _alarmTime.setHours(_alarmTime.getHours() + 12);
-            }
-            var _addAlarm = navigator.mozAlarms.add(_alarmTime, ALARM_NAME);
-            _addAlarm.onsuccess = function () {
-                this.result.forEach(function (p_alarm) {
-                    alert(p_alarm.date);
-                });
-            };
+            var angle = _rotate[2];
+            options.endRotate(angle);
         }
+    }
+
+    function _setAlarm (angle) {
+        var _alarmTime = new Date();
+        var _alarmSeconds = (angle/360 + 1)*12*60*60*1000;
+        _alarmTime.setHours(0);
+        _alarmTime.setMinutes(0);
+        _alarmTime.setSeconds(0);
+        _alarmTime.setMilliseconds(_alarmSeconds);
+        if (_alarmTime.getTime() < (new Date()).getTime()) {// past time
+            _alarmTime.setHours(_alarmTime.getHours() + 12);
+        }
+        var _addAlarm = navigator.mozAlarms.add(_alarmTime, ALARM_NAME);
+        _addAlarm.onsuccess = function () {
+            this.result.forEach(function (p_alarm) {
+                alert(p_alarm.date);
+            });
+        };
     }
 })();
