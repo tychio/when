@@ -1,14 +1,12 @@
 window.Timer = (function (undefined) {
     "use strict";
-    var PREFIXS = ['', 'moz', 'webkit'];
     var timer;
     return function () {
         var options = {
-            widthSecond: 4, //deg
-            widthMinute: 10,
-            widthHour: 30,
             accuracy: 40 //ms
         };
+
+        var dial = Dial();
 
         var api = {
             start: startTricle,
@@ -48,7 +46,7 @@ window.Timer = (function (undefined) {
                 meridiem: p_hours >= 12
             });
             // plate part
-            setTimePlate({
+            dial.set({
                 second: p_seconds + p_milliseconds / 1000,
                 minute: p_minutes + p_seconds / 60,
                 hour: p_hours + p_minutes / 60
@@ -58,34 +56,6 @@ window.Timer = (function (undefined) {
                 hour: p_hours,
                 month: p_months
             });
-        }
-        // setting the clock plate include second,minute and hour pointer.
-        function setTimePlate (p_time) {
-            var selector = {
-                second: '.point_second',
-                minute: '.point_minute',
-                hour: '.point_hour'
-            };
-            _setTimePoint(p_time.second, options.widthSecond, selector.second, 60);
-            _setTimePoint(p_time.minute, options.widthMinute, selector.minute, 60);
-            _setTimePoint(p_time.hour, options.widthHour, selector.hour, 12);
-            /**
-             * setting a pointer rotate for webkit and moz
-             * @param p_time a value for the pointer.
-             * @param p_width the pointer's width
-             * @param p_selector the pointer selector
-             * @param p_scope units amount to the scope in cycle.
-            **/
-            function _setTimePoint (p_time, p_width, p_selector, p_scope) {
-                var rotate = p_time*(360/p_scope) - 90 + p_width*0.5;
-                var skew = p_width - 90;
-                var transform = 'rotate(' + rotate + 'deg) skew(' + skew + 'deg)';
-                for (var i = 0; i < PREFIXS.length; i++) {
-                    var _prefix = PREFIXS[i] === '' ? '' : '-' + PREFIXS[i] + '-';
-                    var _dom = document.querySelector(p_selector);
-                    _dom.style[_prefix + 'transform'] = transform;
-                }
-            }
         }
         // setting clock text include am or pm,second,minute and hour.
         function setTimeText (p_time) {
