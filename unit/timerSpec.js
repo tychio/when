@@ -45,7 +45,7 @@ describe('Timer', function () {
         jasmine.clock().uninstall();
     });
 
-    describe('text of', function () {
+    xdescribe('text of', function () {
         describe('meridiem', function () {
             var meridiem;
 
@@ -185,7 +185,7 @@ describe('Timer', function () {
         });
     });
 
-    describe('pointer of', function () {
+    xdescribe('pointer of', function () {
         var pointer;
         beforeEach(function () {
             pointer = {

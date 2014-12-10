@@ -6,12 +6,12 @@ window.Timer = (function (undefined) {
             accuracy: 40 //ms
         };
 
-        var dial = Dial();
-
         var api = {
             start: startTricle,
             stop: stopTricle
         };
+
+        var pointer = getPointer();
 
         function startTricle () {
             timer = setInterval(tricle, options.accuracy);
@@ -36,6 +36,20 @@ window.Timer = (function (undefined) {
             // output datetime
             document.querySelector('time').setAttribute('datetime', time.toLocaleString());
         }
+
+        function getPointer () {
+            var pointer = {
+                second: Dial({ name: 'point_second', radian:  4, scope: 60 }),
+                minute: Dial({ name: 'point_minute', radian: 10, scope: 60 }),
+                hour:   Dial({ name:   'point_hour', radian: 30, scope: 12 })
+            };
+            pointer.second.init();
+            pointer.minute.init();
+            pointer.hour.init();
+
+            return pointer;
+        }
+
         // set text and plate
         function setTimer (p_milliseconds, p_seconds, p_minutes, p_hours, p_months) {
             // text part
@@ -46,11 +60,9 @@ window.Timer = (function (undefined) {
                 meridiem: p_hours >= 12
             });
             // plate part
-            dial.set({
-                second: p_seconds + p_milliseconds / 1000,
-                minute: p_minutes + p_seconds / 60,
-                hour: p_hours + p_minutes / 60
-            });
+            pointer.second.set(p_seconds + p_milliseconds / 1000);
+            pointer.minute.set(p_minutes + p_seconds / 60);
+            pointer.hour.set(p_hours + p_minutes / 60);
             // color
             setSkyColor({
                 hour: p_hours,

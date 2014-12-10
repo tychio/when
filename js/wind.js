@@ -16,8 +16,6 @@ window.Wind = (function (undefined) {
         var main = document.querySelector('main');
         var alarmPointer = document.querySelector('.time-alarm');
 
-        var ALARM_NAME = 'only_alarm';
-
         panel.addEventListener('touchstart', _toSet, false);
         main.addEventListener('touchmove', _rotate, false);
         main.addEventListener('touchend', _set, false);
@@ -64,6 +62,7 @@ window.Wind = (function (undefined) {
         }
 
         function _setAlarm (angle) {
+            var ALARM_NAME = 'only_alarm';
             var _alarmTime = new Date();
             var _alarmSeconds = (angle/360 + 1)*12*60*60*1000;
             _alarmTime.setHours(0);
