@@ -13,6 +13,7 @@ window.Timer = (function (undefined) {
 
         var pointer = getPointer();
         var counter = createTimer();
+        var weather = initWeather();
 
         function startTricle () {
             timer = setInterval(tricle, options.accuracy);
@@ -58,45 +59,27 @@ window.Timer = (function (undefined) {
             return pointer;
         }
 
+        function initWeather () {
+            var skyColor = Sky();
+            skyColor.init();
+            return skyColor;
+        }
+
         // set text and plate
         function setTimer (p_milliseconds, p_seconds, p_minutes, p_hours, p_months) {
-            // text part
             var timeTexts = [
                 p_hours > 12 ? p_hours % 12 : p_hours,
                 p_minutes,
                 p_seconds
             ];
             var meridiem = p_hours >= 12 ? 'PM' : 'AM';
-
             counter.prefix(meridiem).set(timeTexts);
 
             pointer.second.set(p_seconds + p_milliseconds / 1000);
             pointer.minute.set(p_minutes + p_seconds / 60);
             pointer.hour.set(p_hours + p_minutes / 60);
-            // color
-            setSkyColor({
-                hour: p_hours,
-                month: p_months
-            });
-        }
-        // setting sky color such as background and text color.
-        function setSkyColor (p_time) {
-            var sunrise = 8;
-            var sunset = 18;
-            if (_atTimeZone(p_time.month, 3, 11)) {// summer
-                sunrise = 6;
-                sunset = 20;
-            }
-            var mainDOM = document.querySelector('main');
-            var NIGHT_CLASS = 'dark';
-            if (_atTimeZone(p_time.hour, sunrise, sunset)) {// daytime
-                mainDOM.classList.remove(NIGHT_CLASS);
-            } else {// night
-                mainDOM.classList.add(NIGHT_CLASS);
-            }
-            function _atTimeZone (p_time, p_start, p_end) {
-                return (p_time - p_start)*(p_end - p_time) > 0;
-            }
+
+            weather.set(p_months, p_hours);
         }
 
         return api;
