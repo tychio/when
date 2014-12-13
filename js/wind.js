@@ -5,8 +5,12 @@ window.Wind = (function (undefined) {
             endRotate: _setAlarm
         };
 
-        for (var key in opt) {
-            options[key] = opt[key];
+        if (typeof opt === 'function') {
+            options.endRotate = opt;
+        } else {
+            for (var key in opt) {
+                options[key] = opt[key];
+            }
         }
 
         var touch = false;
