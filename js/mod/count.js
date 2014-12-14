@@ -18,6 +18,7 @@ window.Count = (function (undefined) {
     
 	return function (opt) {
 		var $counter;
+        var values;
 		var options = {
 			name: 'time-count',
 			className: 'time-count',
@@ -34,6 +35,7 @@ window.Count = (function (undefined) {
         var api = {
         	init: createContainer,
         	set: setCountValue,
+            get: getCountValue,
         	prefix: updatePrefix,
         	show: showCounter,
         	hide: hideCounter
@@ -48,16 +50,21 @@ window.Count = (function (undefined) {
         	return api;
         }
 
-        function setCountValue (values) {
-        	values = values.map(function (val) {
+        function setCountValue (vals) {
+            values = vals;
+        	var elements = vals.map(function (val) {
         		return _wrapSpan(_coverage(val, options.digit));
         	});
         	var _space = _wrapSpan('&nbsp;');
         	var _prefix = options.prefix ? _wrapSpan(options.prefix) + _space : options.prefix;
 
-        	$counter.innerHTML = _prefix + values.join(_wrapSpan(options.division));
+        	$counter.innerHTML = _prefix + elements.join(_wrapSpan(options.division));
 
         	return api;
+        }
+
+        function getCountValue () {
+            return values;
         }
 
         function updatePrefix (prefix) {

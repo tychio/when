@@ -2,6 +2,7 @@ window.Tabata = (function (undefined) {
     'use strict';
     return function (opt) {
         var count;
+        var timeout;
         var options = {
             before: function () {},
             after: function () {}
@@ -27,14 +28,24 @@ window.Tabata = (function (undefined) {
 
         function showTabata () {
             options.before();
-            options.count.show().set([0,0,0]);
+            options.count.show().set([0]);
             options.after();
 
             return api;
         }
 
         function startTabata () {
+            _train();
+
             return api;
+        }
+
+        function _train () {
+            timeout = setInterval(function () {
+                var values = options.count.get();
+                values[values.length - 1] += 1;
+                options.count.set(values);
+            }, 1000);
         }
 
         return api;
