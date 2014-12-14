@@ -31,13 +31,20 @@
     <script type="text/javascript" src="js/lib/count.js"></script>
     <script type="text/javascript" src="js/lib/sky.js"></script>
     <script type="text/javascript" src="js/update.js"></script>
+    <script type="text/javascript" src="js/tabata.js"></script>
     <script type="text/javascript" src="js/timer.js"></script>
     <script type="text/javascript" src="js/wind.js"></script>
     <script type="text/javascript" charset="utf-8">
         var timer = Timer();
         timer.start();
+        var tabata = Tabata({
+            before: function () {
+                timer.counter.hide();
+            }
+        }).init();
 
         Wind(function (angle) {
+            tabata.show().start();
         });
     </script>
 </body>

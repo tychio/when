@@ -3,6 +3,7 @@ window.Count = (function (undefined) {
 		var $counter;
 		var options = {
 			name: 'time-count',
+			className: 'time-count',
 			prefix: '',
 			division: ':',
 			digit: 2,
@@ -62,9 +63,10 @@ window.Count = (function (undefined) {
         	return api;
         }
 
-        function _createElementAppendTo (elementName, className, container) {
+        function _createElementAppendTo (elementName, id, container) {
             var $element = document.createElement(elementName);
-            $element.classList.add(className);
+            $element.classList.add(options.className);
+            $element.setAttribute('id', id);
             var $container = document.querySelector(container);
             $container.appendChild($element);
 
