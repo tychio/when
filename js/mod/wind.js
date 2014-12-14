@@ -1,5 +1,11 @@
 window.Wind = (function (undefined) {
     'use strict';
+
+    function _calculateRotate (p_touch_x, p_touch_y, p_target_x, p_target_y) {
+        var _PI = Math.atan2(p_touch_x - p_target_x, p_touch_y - p_target_y);
+        return (2 - (_PI/Math.PI + 1))*180;
+    }
+    
     return function (opt) {
         var options = {
             rotate: function () {},
@@ -59,11 +65,6 @@ window.Wind = (function (undefined) {
 
         function _tap (p_event) {
             options.tap(p_event);
-        }
-
-        function _calculateRotate (p_touch_x, p_touch_y, p_target_x, p_target_y) {
-            var _PI = Math.atan2(p_touch_x - p_target_x, p_touch_y - p_target_y);
-            return (2 - (_PI/Math.PI + 1))*180;
         }
 
         function _setRotateStyle (p_rotate) {

@@ -1,4 +1,21 @@
 window.Count = (function (undefined) {
+    'use strict';
+
+    function _coverage (p_number, p_size) {
+        p_number += '';// parse to string
+        if (p_size === undefined) {// default size is 2
+            return p_number;
+        }
+        for (var i = 0; i < p_size; i++) {// cover zero
+            p_number = '0' + p_number;
+        }
+        return p_number.slice(0 - p_size);
+    }
+
+    function _wrapSpan (content) {
+        return '<span>' + content + '</span>';
+    }
+    
 	return function (opt) {
 		var $counter;
 		var options = {
@@ -71,21 +88,6 @@ window.Count = (function (undefined) {
             $container.appendChild($element);
 
             return $element;
-        }
-
-        function _coverage (p_number, p_size) {
-            p_number += '';// parse to string
-            if (p_size === undefined) {// default size is 2
-                return p_number;
-            }
-            for (var i = 0; i < p_size; i++) {// cover zero
-                p_number = '0' + p_number;
-            }
-            return p_number.slice(0 - p_size);
-        }
-
-        function _wrapSpan (content) {
-        	return '<span>' + content + '</span>';
         }
 
         return api;

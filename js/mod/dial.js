@@ -1,4 +1,5 @@
 window.Dial = (function (undefined) {
+    'use strict';
     var PREFIXS = ['', 'moz', 'webkit'];
 	return function (opt) {
         var $pointer;

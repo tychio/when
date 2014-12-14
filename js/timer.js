@@ -1,5 +1,5 @@
 window.Timer = (function (undefined) {
-    "use strict";
+    'use strict';
     return function () {
         var timer;
         var options = {

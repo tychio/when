@@ -1,4 +1,5 @@
 var Sky = (function (undefined) {
+    'use strict';
     function _atTimeZone (p_hour, p_start, p_end) {
         return (p_hour - p_start)*(p_end - p_hour) > 0;
     }
