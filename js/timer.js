@@ -1,7 +1,7 @@
 window.Timer = (function (undefined) {
     "use strict";
-    var timer;
     return function () {
+        var timer;
         var options = {
             accuracy: 40 //ms
         };
