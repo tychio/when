@@ -2,7 +2,11 @@ window.Wind = (function (undefined) {
     'use strict';
     return function (opt) {
         var options = {
-            endRotate: _setAlarm
+            endRotate: _setAlarm, 
+            panel: document.querySelector('.time-panel'),
+            plate: document.querySelector('.upside'),
+            main: document.querySelector('.main'),
+            alarmPointer: document.querySelector('.time-alarm')
         };
 
         if (typeof opt === 'function') {
@@ -15,27 +19,22 @@ window.Wind = (function (undefined) {
 
         var touch = false;
 
-        var panel = document.querySelector('.time-panel');
-        var plate = document.querySelector('.time-plate');
-        var main = document.querySelector('main');
-        var alarmPointer = document.querySelector('.time-alarm');
-
-        panel.addEventListener('touchstart', _toSet, false);
-        main.addEventListener('touchmove', _rotate, false);
-        main.addEventListener('touchend', _set, false);
-        main.addEventListener('touchcancel', _set, false);
+        options.panel.addEventListener('touchstart', _toSet, false);
+        options.main.addEventListener('touchmove', _rotate, false);
+        options.main.addEventListener('touchend', _set, false);
+        options.main.addEventListener('touchcancel', _set, false);
         // start touch the clock panel for start to set a alarm time.
         function _toSet (p_event) {
             p_event.preventDefault();
             touch = true;
-            alarmPointer.style.display = 'block';
+            options.alarmPointer.style.display = 'block';
         }
         // to rotate the alarm pointer on move touch.
         function _rotate (p_event) {
             p_event.preventDefault();
             if (touch) {
                 var touchPos = p_event.touches[0];
-                var rotate = _getRotate(touchPos.pageX, touchPos.pageY, plate.clientWidth*0.5, plate.clientHeight*0.5);
+                var rotate = _getRotate(touchPos.pageX, touchPos.pageY, options.plate.clientWidth*0.5, options.plate.clientHeight*0.5);
                 _setRotate(rotate);
             }
             function _getRotate (p_touch_x, p_touch_y, p_target_x, p_target_y) {
@@ -48,7 +47,7 @@ window.Wind = (function (undefined) {
                     if (_prefix[i].length > 0) {
                         _prefix[i] = '-' + _prefix[i] + '-';
                     }
-                    alarmPointer.style[_prefix[i] + 'transform'] = 'rotate(' + p_rotate + 'deg)';
+                    options.alarmPointer.style[_prefix[i] + 'transform'] = 'rotate(' + p_rotate + 'deg)';
                 }
             }
         }
@@ -56,8 +55,8 @@ window.Wind = (function (undefined) {
         function _set (p_event) {
             p_event.preventDefault();
             touch = false;
-            alarmPointer.style.display = 'none';
-            var _transform = alarmPointer.style.transform;
+            options.alarmPointer.style.display = 'none';
+            var _transform = options.alarmPointer.style.transform;
             var _rotate = /(rotate[\s]*\()([\d.]+)/.exec(_transform);
             if (_rotate && _rotate[2]) {
                 var angle = _rotate[2];

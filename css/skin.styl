@@ -43,24 +43,25 @@ transition(p_target, p_second)
     -o-transition p_target p_second
     transition p_target p_second
 
-// layout
-header,main,footer
+.header,
+.main,
+.footer
     position absolute
     overflow hidden
     display block
     float left
-header
+.header
     z-index 12000
-main
+.main
     z-index 10000
     width 100%
     height 100%
     background $colorLightBg
     transition background $timeAlternate
-    section
+    .section
         position relative
         padding 0 10%
-        &.time-plate
+        &.upside
             height $sizePlate
             width 80%
             .time-cycle
@@ -127,20 +128,21 @@ main
                 transition color $timeAlternate
     &.dark
         background $colorDarkBg
-        section .time-count span
-            color $colorDarkText
-        section.time-plate .time-cycle
-            background $colorLightBg
-            .time-panel
-                background $colorDarkBg
-            .time-point
-                &.point_second
-                    background $colorDarkPointer
-                &.point_minute
-                    background lighten($colorDarkPointer, 40%)
-                &.point_hour
-                    background lighten($colorDarkPointer, 80%)
-            .time-alarm
+        .section
+            &.downside .time-count span
+                color $colorDarkText
+            &.upside .time-cycle
                 background $colorLightBg
-footer
+                .time-panel
+                    background $colorDarkBg
+                .time-point
+                    &.point_second
+                        background $colorDarkPointer
+                    &.point_minute
+                        background lighten($colorDarkPointer, 40%)
+                    &.point_hour
+                        background lighten($colorDarkPointer, 80%)
+                .time-alarm
+                    background $colorLightBg
+.footer
     z-index 11000
