@@ -11,9 +11,9 @@ window.Timer = (function (undefined) {
             stop: stopTricle
         };
 
-        var pointer = getPointer();
-        var counter = createTimer();
-        var weather = initWeather();
+        api.pointer = getPointer();
+        api.counter = createTimer();
+        api.weather = initWeather();
 
         function startTricle () {
             timer = setInterval(tricle, options.accuracy);
@@ -73,13 +73,13 @@ window.Timer = (function (undefined) {
                 p_seconds
             ];
             var meridiem = p_hours >= 12 ? 'PM' : 'AM';
-            counter.prefix(meridiem).set(timeTexts);
+            api.counter.prefix(meridiem).set(timeTexts);
 
-            pointer.second.set(p_seconds + p_milliseconds / 1000);
-            pointer.minute.set(p_minutes + p_seconds / 60);
-            pointer.hour.set(p_hours + p_minutes / 60);
+            api.pointer.second.set(p_seconds + p_milliseconds / 1000);
+            api.pointer.minute.set(p_minutes + p_seconds / 60);
+            api.pointer.hour.set(p_hours + p_minutes / 60);
 
-            weather.set(p_months, p_hours);
+            api.weather.set(p_months, p_hours);
         }
 
         return api;

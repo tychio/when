@@ -5,7 +5,8 @@ window.Count = (function (undefined) {
 			name: 'time-count',
 			prefix: '',
 			division: ':',
-			digit: 2
+			digit: 2,
+			hidden: false
 		};
 
         for (var key in opt) {
@@ -15,11 +16,16 @@ window.Count = (function (undefined) {
         var api = {
         	init: createContainer,
         	set: setCountValue,
-        	prefix: updatePrefix
+        	prefix: updatePrefix,
+        	show: showCounter,
+        	hide: hideCounter
         };
 
         function createContainer () {
         	$counter = _createElementAppendTo('div', options.name, '#count-set');
+        	if (options.hidden) {
+        		hideCounter();
+        	}
 
         	return api;
         }
@@ -38,6 +44,20 @@ window.Count = (function (undefined) {
 
         function updatePrefix (prefix) {
         	options.prefix = prefix;
+
+        	return api;
+        }
+
+        function showCounter () {
+        	$counter.style.height = $counter.style.maxHeight;
+        	$counter.style.opacity = 1;
+
+        	return api;
+        }
+
+        function hideCounter () {
+        	$counter.style.height = 0;
+        	$counter.style.opacity = 0;
 
         	return api;
         }

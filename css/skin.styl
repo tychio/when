@@ -9,9 +9,11 @@ $sizeClock = 200px
 $sizeShadow = 10px
 $sizeAlarm = 4px
 $sizePlate = 75%
+$sizeHeightBar = 40px
 $sizeSpace = 2px
 $sizeFont = 2rem
 $timeAlternate = 2s
+$timeSwitch = 0.8s
 // function
 shadow(p_attr)
     -webkit-box-shadow p_attr
@@ -119,9 +121,13 @@ transition(p_target, p_second)
                     background $colorDarkBg
                     transition background $timeAlternate
         .time-count
-            height 100% - $sizePlate
+            overflow hidden
+            height $sizeHeightBar
+            max-height $sizeHeightBar
+            opacity 1
             text-align center
             font-size $sizeFont
+            transition all, $timeSwitch
             span
                 padding 0 $sizeSpace               
                 color $colorLightText

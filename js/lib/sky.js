@@ -6,7 +6,7 @@ var Sky = (function (undefined) {
         var $velarium;
 
 		var options = {
-			handler: 'main',
+			handler: '.main',
 			darkClass: 'dark'
 		};
         for (var key in opt) {
