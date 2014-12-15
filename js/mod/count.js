@@ -51,8 +51,12 @@ window.Count = (function (undefined) {
         }
 
         function setCountValue (vals) {
-            values = vals;
-        	var elements = vals.map(function (val) {
+            if (typeof vals === 'object') {
+                values = vals;
+            } else {
+                values = [vals];
+            }
+        	var elements = values.map(function (val) {
         		return _wrapSpan(_coverage(val, options.digit));
         	});
         	var _space = _wrapSpan('&nbsp;');
