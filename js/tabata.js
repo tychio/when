@@ -4,8 +4,7 @@ window.Tabata = (function (undefined) {
         var count;
         var timeout;
         var options = {
-            before: function () {},
-            after: function () {},
+            name: 'time-number',
             bg: '.main'
         };
 
@@ -16,22 +15,29 @@ window.Tabata = (function (undefined) {
         var api = {
             init: initTabata,
             show: showTabata,
-            start: startTabata
+            hide: hideTabata,
+            start: startTabata,
+            stop: stopTabata
         };
 
         function initTabata () {
             options.count = Count({
                 name: 'tabata',
-                hidden: true
+                className: options.name,
+                handler: '.time-cycle'
             }).init();
 
             return api;
         }
 
         function showTabata () {
-            options.before();
             options.count.set(0).show();
-            options.after();
+
+            return api;
+        }
+
+        function hideTabata () {
+            options.count.hide();
 
             return api;
         }
@@ -41,8 +47,15 @@ window.Tabata = (function (undefined) {
             return api;
         }
 
+        function stopTabata () {
+            _clear();
+            return api;
+        }
+
         function _clear () {
             clearInterval(timeout);
+            document.querySelector(options.bg).classList.remove('positive');
+            document.querySelector(options.bg).classList.remove('relax');
         }
 
         function _train () {

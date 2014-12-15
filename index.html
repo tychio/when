@@ -37,14 +37,16 @@
     <script type="text/javascript" charset="utf-8">
         var timer = Timer();
         timer.start();
-        var tabata = Tabata({
-            before: function () {
-                timer.counter.hide();
-            }
-        }).init();
-
+        var tabata = Tabata().init();
+        var tabataMod = false;
         Wind(function (angle) {
-            tabata.show().start();
+            if (tabataMod) {
+                tabataMod = false;
+                tabata.hide().stop();
+            } else {
+                tabataMod = true;
+                tabata.show().start();
+            }
         });
     </script>
 </body>

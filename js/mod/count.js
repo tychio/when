@@ -21,6 +21,7 @@ window.Count = (function (undefined) {
         var values;
 		var options = {
 			name: 'time-count',
+            handler: '#count-set',
 			className: 'time-count',
 			prefix: '',
 			division: ':',
@@ -42,7 +43,7 @@ window.Count = (function (undefined) {
         };
 
         function createContainer () {
-        	$counter = _createElementAppendTo('div', options.name, '#count-set');
+        	$counter = _createElementAppendTo('div', options.name, options.handler);
         	if (options.hidden) {
         		hideCounter();
         	}
