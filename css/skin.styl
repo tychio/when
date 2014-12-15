@@ -7,6 +7,8 @@ $colorDarkBg = #4d4e53
 $colorDarkPointer = #00539f
 $colorPositive = #db5a7a
 $colorRelax = #69dbd5
+$colorOtherText = #f8f8f8
+$colorOtherPointer = #555
 $sizeClock = 200px
 $sizeShadow = 10px
 $sizeAlarm = 4px
@@ -170,41 +172,33 @@ transition(p_target, p_second)
                 .time-number
                     span
                         color $colorDarkText
+    &.positive,
+    &.relax
+        .section
+            &.downside .time-count span
+                color $colorOtherText
+            &.upside .time-cycle 
+                .time-point
+                    &.point_second
+                        background $colorOtherPointer
+                    &.point_minute
+                        background lighten($colorOtherPointer, 40%)
+                    &.point_hour
+                        background lighten($colorOtherPointer, 80%)
+                .time-number
+                    span
+                        color $colorOtherText
     &.positive
         background $colorPositive
         .section
-            &.downside .time-count span
-                color $colorLightBg
             &.upside .time-cycle 
                 .time-panel
                     background $colorPositive
-                .time-point
-                    &.point_second
-                        background $colorDarkBg
-                    &.point_minute
-                        background lighten($colorDarkBg, 40%)
-                    &.point_hour
-                        background lighten($colorDarkBg, 80%)
-                .time-number
-                    span
-                        color $colorLightBg
     &.relax
         background $colorRelax
         .section
-            &.downside .time-count span
-                color $colorLightBg
             &.upside .time-cycle 
                 .time-panel
                     background $colorRelax
-                .time-point
-                    &.point_second
-                        background $colorDarkBg
-                    &.point_minute
-                        background lighten($colorDarkBg, 40%)
-                    &.point_hour
-                        background lighten($colorDarkBg, 80%)
-                .time-number
-                    span
-                        color $colorLightBg
 .footer
     z-index 11000
