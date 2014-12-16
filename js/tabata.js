@@ -5,7 +5,13 @@ window.Tabata = (function (undefined) {
         var timeout;
         var options = {
             name: 'time-number',
-            bg: '.main'
+            bg: '.main',
+            audio: {
+                'positive': 'audio/gun.wav',
+                'relax': 'audio/gun.wav',
+                'end-positive': 'audio/end.wav',
+                'end-relax': 'audio/end.wav'
+            }
         };
 
         for (var key in opt) {
@@ -75,16 +81,25 @@ window.Tabata = (function (undefined) {
             _clear();
             timeout = setInterval(function () {
                 var values = options.count.get();
-                if (values[0] <= 0) {
-                    document.querySelector(options.bg).classList.remove(p_class);
-                    _clear();
-                    p_end();
-                } else {
+                if (values[0] > 0) {
                     values[0] -= 1;
                     options.count.set(values);
+                    _playSound(p_class);
+                }
+                if (values[0] <= 0) {
+                    _playSound('end-' + p_class);
+                    setTimeout(function () {
+                        _clear();
+                        p_end();    
+                    }, 1000);
                 }
             }, 1000);
             document.querySelector(options.bg).classList.add(p_class);
+        }
+
+        function _playSound (p_name) {
+            var audio = new Audio(options.audio[p_name]);
+            audio && audio.play();
         }
 
         return api;
