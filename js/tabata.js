@@ -43,7 +43,7 @@ window.Tabata = (function (undefined) {
         }
 
         function startTabata () {
-            _train()
+            _break()
             return api;
         }
 
@@ -71,16 +71,16 @@ window.Tabata = (function (undefined) {
         }
 
         function _discount (p_limit, p_class, p_end) {
-            options.count.set(0);
+            options.count.set(p_limit);
             _clear();
             timeout = setInterval(function () {
                 var values = options.count.get();
-                if (values[0] >= p_limit) {
+                if (values[0] <= 0) {
                     document.querySelector(options.bg).classList.remove(p_class);
                     _clear();
                     p_end();
                 } else {
-                    values[0] += 1;
+                    values[0] -= 1;
                     options.count.set(values);
                 }
             }, 1000);
