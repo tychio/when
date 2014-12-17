@@ -93,10 +93,8 @@ window.Tabata = (function (undefined) {
                 }
                 if (values[0] <= 0) {
                     _playSound('end-' + p_class);
-                    setTimeout(function () {
-                        _clear();
-                        p_end();    
-                    }, 1000);
+                    _clear();
+                    p_end();
                 }
             }, 1000);
             document.querySelector(options.bg).classList.add(p_class);
@@ -110,7 +108,8 @@ window.Tabata = (function (undefined) {
 
         function _playSound (p_name) {
             var audio = options.audio[p_name];
-            audio && audio.play();
+            audio.currentTime = 0;
+            audio.play();
         }
 
         return api;
