@@ -33,18 +33,13 @@ h1,h2,h3,h4,h5,h6{margin:0}
 .main.dark .section.upside .time-cycle .time-point.point_hour{background:#b9ddff}
 .main.dark .section.upside .time-cycle .time-alarm{background:#f4f4f4}
 .main.dark .section.upside .time-cycle .time-number span{color:#0095dd}
+.main.positive .section.downside .time-count span,.main.relax .section.downside .time-count span{color:#f8f8f8}
+.main.positive .section.upside .time-cycle .time-point.point_second,.main.relax .section.upside .time-cycle .time-point.point_second{background:#555}
+.main.positive .section.upside .time-cycle .time-point.point_minute,.main.relax .section.upside .time-cycle .time-point.point_minute{background:#999}
+.main.positive .section.upside .time-cycle .time-point.point_hour,.main.relax .section.upside .time-cycle .time-point.point_hour{background:#ddd}
+.main.positive .section.upside .time-cycle .time-number span,.main.relax .section.upside .time-cycle .time-number span{color:#f8f8f8}
 .main.positive{background:#db5a7a;}
-.main.positive .section.downside .time-count span{color:#f4f4f4}
 .main.positive .section.upside .time-cycle .time-panel{background:#db5a7a}
-.main.positive .section.upside .time-cycle .time-point.point_second{background:#4d4e53}
-.main.positive .section.upside .time-cycle .time-point.point_minute{background:#92939a}
-.main.positive .section.upside .time-cycle .time-point.point_hour{background:#dbdbdd}
-.main.positive .section.upside .time-cycle .time-number span{color:#f4f4f4}
 .main.relax{background:#69dbd5;}
-.main.relax .section.downside .time-count span{color:#f4f4f4}
 .main.relax .section.upside .time-cycle .time-panel{background:#69dbd5}
-.main.relax .section.upside .time-cycle .time-point.point_second{background:#4d4e53}
-.main.relax .section.upside .time-cycle .time-point.point_minute{background:#92939a}
-.main.relax .section.upside .time-cycle .time-point.point_hour{background:#dbdbdd}
-.main.relax .section.upside .time-cycle .time-number span{color:#f4f4f4}
 .footer{z-index:11000}
