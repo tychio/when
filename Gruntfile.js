@@ -4,11 +4,17 @@ module.exports = function (grunt) {
         'index.html',
         'js/update.js',
         'js/timer.js',
-        'js/alarm.js',
+        'js/tabata.js',
+        'js/mod/count.js',
+        'js/mod/dial.js',
+        'js/mod/sky.js',
+        'js/mod/wind.js',
         'css/style.css',
         'font/moztt_regular-webfont.woff',
         'font/moztt_medium-webfont.woff',
-        'font/moztt_light-webfont.woff'
+        'font/moztt_light-webfont.woff',
+        'audio/end.wav',
+        'audio/gun.wav'
     ];
     grunt.initConfig({
         watch: {

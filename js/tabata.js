@@ -63,7 +63,7 @@ window.Tabata = (function (undefined) {
             document.querySelector(options.bg).classList.remove('positive');
             document.querySelector(options.bg).classList.remove('relax');
         }
-
+        
         function _train (discount) {
             _discount(20, 'positive', function () {
                 _break(discount-1);
