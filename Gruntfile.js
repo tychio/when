@@ -2,8 +2,13 @@ module.exports = function (grunt) {
     'use strict';
     var cacheFilesArr = [
         'index.html',
-        'js/*.js',
-        'js/mod/*.js',
+        'js/update.js',
+        'js/timer.js',
+        'js/tabata.js',
+        'js/mod/count.js',
+        'js/mod/dial.js',
+        'js/mod/sky.js',
+        'js/mod/wind.js',
         'css/style.css',
         'font/moztt_regular-webfont.woff',
         'font/moztt_medium-webfont.woff',
