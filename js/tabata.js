@@ -49,7 +49,7 @@ window.Tabata = (function (undefined) {
         }
 
         function startTabata () {
-            _audioLoad()
+            // _audioLoad()
             _break(8)
             return api;
         }
