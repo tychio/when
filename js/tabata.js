@@ -49,11 +49,7 @@ window.Tabata = (function (undefined) {
         }
 
         function startTabata () {
-<<<<<<< HEAD
-            _break()
-=======
             _break(8)
->>>>>>> master
             return api;
         }
 
@@ -67,18 +63,7 @@ window.Tabata = (function (undefined) {
             document.querySelector(options.bg).classList.remove('positive');
             document.querySelector(options.bg).classList.remove('relax');
         }
-
-<<<<<<< HEAD
-        function _train () {
-            _discount(20, 'positive', function () {
-                _break();
-            });
-        }
-
-        function _break () {
-            _discount(10, 'relax', function () {
-                _train();
-=======
+        
         function _train (discount) {
             _discount(20, 'positive', function () {
                 _break(discount-1);
@@ -92,7 +77,6 @@ window.Tabata = (function (undefined) {
                 } else {
                     _clear();
                 }
->>>>>>> master
             });
         }
 
