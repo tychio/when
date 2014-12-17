@@ -3,8 +3,9 @@
     if (navigator.onLine) {// online
         update();
     }
-    // listen online
-    document.body.addEventListener('online', update);
+    if (navigator.onLine !== undefined) {
+        document.body.addEventListener('online', update);
+    }
     function update () {
         if (window.applicationCache) {
             window.applicationCache.update(); // Attempt to update the user's cache.

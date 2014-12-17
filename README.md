@@ -1,9 +1,9 @@
-Opportunity
+When
 ---
 
 #### What's it? ####
 
-It's a Simple Firefox OS App.
+It's a Simple HTML5 App.
 
 #### What can it do? ####
 
@@ -11,7 +11,7 @@ Just look at the time in moment.
 
 #### Get the Clock ####
 
-I still doing test and build. Visiting [this app](http://www.tychio.net/opportunity/) and click add to screen on your mobile browers.
+I still doing test and build. Visiting [this app](http://www.tychio.net/when/) and click add to screen on your mobile browers.
 
 #### My Goal ####
 
@@ -19,9 +19,11 @@ I still doing test and build. Visiting [this app](http://www.tychio.net/opportun
 
 * It not only can told you what's the time, but also can told you what's sky of color now.
 
-* Of cause! Alarm function.
+* Of cause! Alarm function for Firefox OS.
 
 * I might build a list at backside as todo list, but it's a hotchpotch.
+
+* I'm creating a tabata timer for our BWSTT.
 
 #### Report ####
 

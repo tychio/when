@@ -11,35 +11,43 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body role="application">
-    <header></header>
-    <main>
-        <section class="time-plate">
+    <header class="header"></header>
+    <main class="main">
+        <section class="section upside">
             <div class="time-cycle">
-                <span class="time-point point_second"></span>
-                <span class="time-point point_minute"></span>
-                <span class="time-point point_hour"></span>
+                <div class="time-setpointer" id="dial-set">
+                </div>
                 <span class="time-panel">
                     <time datetime=""></time>
                 </span>
                 <span class="time-alarm"></span>
             </div>
         </section>
-        <section class="time-text">
-            <span class="time_meridiem">AM</span>
-            <span>&nbsp;</span>
-            <span class="time_hour">00</span>
-            <span>&#58;</span>
-            <span class="time_minute">00</span>
-            <span>&#58;</span>
-            <span class="time_second">00</span>
+        <section class="section downside" id="count-set">
         </section>
     </main>
-    <footer></footer>
+    <footer class="footer"></footer>
+    <script type="text/javascript" src="js/mod/dial.js"></script>
+    <script type="text/javascript" src="js/mod/count.js"></script>
+    <script type="text/javascript" src="js/mod/sky.js"></script>
+    <script type="text/javascript" src="js/mod/wind.js"></script>
     <script type="text/javascript" src="js/update.js"></script>
+    <script type="text/javascript" src="js/tabata.js"></script>
     <script type="text/javascript" src="js/timer.js"></script>
-    <script type="text/javascript" src="js/alarm.js"></script>
     <script type="text/javascript" charset="utf-8">
-      Timer();
+        var timer = Timer();
+        timer.start();
+        var tabata = Tabata().init();
+        var tabataMod = false;
+        Wind(function (angle) {
+            if (tabataMod) {
+                tabataMod = false;
+                tabata.hide().stop();
+            } else {
+                tabataMod = true;
+                tabata.show().start();
+            }
+        });
     </script>
 </body>
 </html>

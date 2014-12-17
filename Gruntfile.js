@@ -23,6 +23,7 @@ module.exports = function (grunt) {
             pivotal: {
                 files: [
                     'unit/*Spec.js',
+                    'js/lib/*.js',
                     'js/*.js'
                 ],
                 tasks: 'jasmine'
@@ -58,7 +59,7 @@ module.exports = function (grunt) {
             }
         },
         jasmine: {
-            src: 'js/timer.js',
+            src: ['js/**/*.js'],
             options: {
                 keepRunner: true,
                 outfile: 'unit/runner.html',

@@ -5,11 +5,20 @@ $colorLightPointer = #e66000
 $colorDarkText = #0095dd
 $colorDarkBg = #4d4e53
 $colorDarkPointer = #00539f
+$colorPositive = #db5a7a
+$colorRelax = #69dbd5
+$colorOtherText = #f8f8f8
+$colorOtherPointer = #555
 $sizeClock = 200px
 $sizeShadow = 10px
-$sizeAlarm = 1px
-$sizePlate = 80%
+$sizeAlarm = 4px
+$sizePlate = 75%
+$sizeHeightBar = 40px
+$sizeSpace = 2px
+$sizeFont = 2rem
+$sizeFontCenter = 8rem
 $timeAlternate = 2s
+$timeSwitch = 0.8s
 // function
 shadow(p_attr)
     -webkit-box-shadow p_attr
@@ -41,24 +50,25 @@ transition(p_target, p_second)
     -o-transition p_target p_second
     transition p_target p_second
 
-// layout
-header,main,footer
+.header,
+.main,
+.footer
     position absolute
     overflow hidden
     display block
     float left
-header
+.header
     z-index 12000
-main
+.main
     z-index 10000
     width 100%
     height 100%
     background $colorLightBg
     transition background $timeAlternate
-    section
+    .section
         position relative
         padding 0 10%
-        &.time-plate
+        &.upside
             height $sizePlate
             width 80%
             .time-cycle
@@ -72,7 +82,7 @@ main
                 top 50%
                 left 50%
                 background $colorDarkBg
-                shadow 0 0 $sizeShadow #888, inset 0 0 $sizeShadow*.5 #333
+                box-shadow 0 0 $sizeShadow #CCC, inset 0 0 $sizeShadow*.5 #999
                 radius 50%
                 transition background $timeAlternate
                 .time-point
@@ -100,7 +110,7 @@ main
                     top $sizeClock*.05
                     left $sizeClock*.05
                     z-index 100
-                    shadow inset 0 0 $sizeShadow #c1c4c1
+                    box-shadow inset 0 0 $sizeShadow #AAA
                     background $colorLightBg
                     radius $sizeClock*.45
                     transition background $timeAlternate
@@ -115,29 +125,80 @@ main
                     transform rotate(0) skew(0), left bottom
                     background $colorDarkBg
                     transition background $timeAlternate
-        &.time-text
-            height 100% - $sizePlate
+                .time-number
+                    overflow hidden
+                    position absolute
+                    top $sizeClock*.05
+                    left $sizeClock*.05
+                    z-index 102
+                    span
+                        display inline-block
+                        height $sizeClock*.9
+                        line-height $sizeClock*.9
+                        width $sizeClock*.9
+                        text-align center
+                        font-size $sizeFontCenter
+                        color $colorLightText
+        .time-count
+            overflow hidden
+            height $sizeHeightBar
+            max-height $sizeHeightBar
+            opacity 1
             text-align center
-            font-size 2rem
+            font-size $sizeFont
+            transition all, $timeSwitch
             span
+                padding 0 $sizeSpace               
                 color $colorLightText
                 transition color $timeAlternate
     &.dark
         background $colorDarkBg
-        section.time-text span
-            color $colorDarkText
-        section.time-plate .time-cycle
-            background $colorLightBg
-            .time-panel
-                background $colorDarkBg
-            .time-point
-                &.point_second
-                    background $colorDarkPointer
-                &.point_minute
-                    background lighten($colorDarkPointer, 40%)
-                &.point_hour
-                    background lighten($colorDarkPointer, 80%)
-            .time-alarm
+        .section
+            &.downside .time-count span
+                color $colorDarkText
+            &.upside .time-cycle
                 background $colorLightBg
-footer
+                .time-panel
+                    background $colorDarkBg
+                .time-point
+                    &.point_second
+                        background $colorDarkPointer
+                    &.point_minute
+                        background lighten($colorDarkPointer, 40%)
+                    &.point_hour
+                        background lighten($colorDarkPointer, 80%)
+                .time-alarm
+                    background $colorLightBg
+                .time-number
+                    span
+                        color $colorDarkText
+    &.positive,
+    &.relax
+        .section
+            &.downside .time-count span
+                color $colorOtherText
+            &.upside .time-cycle 
+                .time-point
+                    &.point_second
+                        background $colorOtherPointer
+                    &.point_minute
+                        background lighten($colorOtherPointer, 40%)
+                    &.point_hour
+                        background lighten($colorOtherPointer, 80%)
+                .time-number
+                    span
+                        color $colorOtherText
+    &.positive
+        background $colorPositive
+        .section
+            &.upside .time-cycle 
+                .time-panel
+                    background $colorPositive
+    &.relax
+        background $colorRelax
+        .section
+            &.upside .time-cycle 
+                .time-panel
+                    background $colorRelax
+.footer
     z-index 11000
