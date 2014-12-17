@@ -7,10 +7,10 @@ window.Tabata = (function (undefined) {
             name: 'time-number',
             bg: '.main',
             audio: {
-                'positive': 'audio/gun.wav',
-                'relax': 'audio/gun.wav',
-                'end-positive': 'audio/end.wav',
-                'end-relax': 'audio/end.wav'
+                'positive': new Audio('audio/gun.wav'),
+                'relax': new Audio('audio/gun.wav'),
+                'end-positive': new Audio('audio/end.wav'),
+                'end-relax': new Audio('audio/end.wav')
             }
         };
 
@@ -49,6 +49,7 @@ window.Tabata = (function (undefined) {
         }
 
         function startTabata () {
+            _audioLoad()
             _break(8)
             return api;
         }
@@ -63,7 +64,7 @@ window.Tabata = (function (undefined) {
             document.querySelector(options.bg).classList.remove('positive');
             document.querySelector(options.bg).classList.remove('relax');
         }
-        
+
         function _train (discount) {
             _discount(20, 'positive', function () {
                 _break(discount-1);
@@ -101,8 +102,14 @@ window.Tabata = (function (undefined) {
             document.querySelector(options.bg).classList.add(p_class);
         }
 
+        function _audioLoad () {
+            for (var audio in options.audio) {
+                options.audio[audio].load();
+            }
+        }
+
         function _playSound (p_name) {
-            var audio = new Audio(options.audio[p_name]);
+            var audio = options.audio[p_name];
             audio && audio.play();
         }
 
