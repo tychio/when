@@ -24,6 +24,8 @@ h1,h2,h3,h4,h5,h6{margin:0}
 .main .section.upside .time-cycle .time-number span{display:inline-block;height:180px;line-height:180px;width:180px;text-align:center;font-size:8rem;color:#ff9500}
 .main .section .time-count{overflow:hidden;height:40px;max-height:40px;opacity:1;text-align:center;font-size:2rem;-webkit-transition:all .8s;-moz-transition:all .8s;-ms-transition:all .8s;-o-transition:all .8s;transition:all .8s;}
 .main .section .time-count span{padding:0 2px;color:#ff9500;-webkit-transition:color 2s;-moz-transition:color 2s;-ms-transition:color 2s;-o-transition:color 2s;transition:color 2s}
+.main .section .time-count#tabata-round{height:56px;}
+.main .section .time-count#tabata-round span{font-size:1.4em}
 .main.dark{background:#4d4e53;}
 .main.dark .section.downside .time-count span{color:#0095dd}
 .main.dark .section.upside .time-cycle{background:#f4f4f4;}

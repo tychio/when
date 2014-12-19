@@ -2,8 +2,13 @@ window.Tabata = (function (undefined) {
     'use strict';
     return function (opt) {
         var count;
+        var round;
+        var roundNum;
         var timeout;
         var options = {
+            round: 8,
+            train: 20,
+            pause: 10,
             name: 'time-number',
             bg: '.main',
             audio: {
@@ -11,7 +16,8 @@ window.Tabata = (function (undefined) {
                 'relax': new Audio('audio/gun.wav'),
                 'end-positive': new Audio('audio/end.wav'),
                 'end-relax': new Audio('audio/end.wav')
-            }
+            },
+            onEnd: function () {}
         };
 
         for (var key in opt) {
@@ -27,30 +33,50 @@ window.Tabata = (function (undefined) {
         };
 
         function initTabata () {
-            options.count = Count({
+            count = Count({
                 name: 'tabata',
                 className: options.name,
                 handler: '.time-cycle'
+            }).init();
+
+            roundNum = Count({
+                name: 'tabata-round-num',
+                handler: '#count-set',
+                digit: 1,
+                division: '',
+                hidden: true
+            }).init();
+
+            round = Count({
+                name: 'tabata-round',
+                handler: '#count-set',
+                digit: 1,
+                division: '',
+                hidden: true
             }).init();
 
             return api;
         }
 
         function showTabata () {
-            options.count.set(0).show();
+            count.set(0).show();
+            round.show();
+            roundNum.show();
 
             return api;
         }
 
         function hideTabata () {
-            options.count.hide();
+            count.hide();
+            round.hide();
+            roundNum.hide();
 
             return api;
         }
 
         function startTabata () {
-            _audioLoad()
-            _break(8)
+            _audioLoad();
+            _pause(options.round);
             return api;
         }
 
@@ -66,29 +92,31 @@ window.Tabata = (function (undefined) {
         }
 
         function _train (discount) {
-            _discount(20, 'positive', function () {
-                _break(discount-1);
+            _setRound(discount);
+            _discount(options.train, 'positive', function () {
+                _pause(discount-1);
             });
         }
 
-        function _break (discount) {
-            _discount(10, 'relax', function () {
+        function _pause (discount) {
+            _setRound(discount);
+            _discount(options.pause, 'relax', function () {
                 if (discount > 0) {
                     _train(discount);
                 } else {
-                    _clear();
+                    options.onEnd();
                 }
             });
         }
 
         function _discount (p_limit, p_class, p_end) {
-            options.count.set(p_limit);
+            count.set(p_limit);
             _clear();
             timeout = setInterval(function () {
-                var values = options.count.get();
+                var values = count.get();
                 if (values[0] > 0) {
                     values[0] -= 1;
-                    options.count.set(values);
+                    count.set(values);
                     _playSound(p_class);
                 }
                 if (values[0] <= 0) {
@@ -98,6 +126,15 @@ window.Tabata = (function (undefined) {
                 }
             }, 1000);
             document.querySelector(options.bg).classList.add(p_class);
+        }
+
+        function _setRound (p_round) {
+            var roundDot = [];
+            roundNum.set(p_round);
+            for (var i = 0; i < options.round; i++ ) {
+                roundDot[i] = i < p_round ? '*' : '_';
+            }
+            round.set(roundDot);
         }
 
         function _audioLoad () {
