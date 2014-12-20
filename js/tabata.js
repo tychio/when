@@ -75,7 +75,6 @@ window.Tabata = (function (undefined) {
         }
 
         function startTabata () {
-            _audioLoad();
             _pause(options.round);
             return api;
         }
@@ -135,12 +134,6 @@ window.Tabata = (function (undefined) {
                 roundDot[i] = i < p_round ? '*' : '_';
             }
             round.set(roundDot);
-        }
-
-        function _audioLoad () {
-            for (var audio in options.audio) {
-                options.audio[audio].load();
-            }
         }
 
         function _playSound (p_name) {
