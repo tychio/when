@@ -65,7 +65,7 @@ module.exports = function (grunt) {
             }
         },
         jasmine: {
-            src: ['js/**/*.js'],
+            src: ['js/mod/*.js', 'js/tabata.js', 'js/timer.js'],
             options: {
                 keepRunner: true,
                 outfile: 'unit/runner.html',
