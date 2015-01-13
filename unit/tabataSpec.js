@@ -1,7 +1,7 @@
 describe('Tabata', function () {
 	var count, round, roundNum;
     function facultyCount () {
-        var counter = jasmine.createSpyObj('counter', ['init', 'prefix', 'set', 'show']);
+        var counter = jasmine.createSpyObj('counter', ['init', 'prefix', 'set', 'show', 'hide']);
         counter.init.and.returnValue(counter);
         counter.prefix.and.returnValue(counter);
         counter.set.and.returnValue(counter);
@@ -122,6 +122,28 @@ describe('Tabata', function () {
 			it('should show round component', function () {
 				tabata.show();
 				expect(round.show).toHaveBeenCalled();
+			});
+		});
+
+		describe('hide', function () {
+			beforeEach(function () {
+				tabata = Tabata();
+				tabata.init();
+			});
+
+			it('should hide count component', function () {
+				tabata.hide();
+				expect(count.hide).toHaveBeenCalled();
+			});
+
+			it('should hide round number component', function () {
+				tabata.hide();
+				expect(roundNum.hide).toHaveBeenCalled();
+			});
+
+			it('should hide round component', function () {
+				tabata.hide();
+				expect(round.hide).toHaveBeenCalled();
 			});
 		});
 	});
