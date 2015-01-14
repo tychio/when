@@ -19,7 +19,7 @@ describe('Tabata', function () {
         });
 
 		window.Audio = jasmine.createSpy('audio');
-		window.Audio.and.callFake(function (param) { console.log(param); return param; });
+		window.Audio.and.callFake(function (param) { return param; });
     });
 
     describe('option', function () {
