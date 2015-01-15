@@ -146,5 +146,33 @@ describe('Tabata', function () {
 				expect(round.hide).toHaveBeenCalled();
 			});
 		});
+
+		describe('start', function () {
+			var classList;
+
+			beforeEach(function () {
+				classList = jasmine.createSpyObj('classList', ['add', 'remove']);
+				spyOn(document, 'querySelector').and.returnValue({
+					'classList': classList
+				});
+
+				tabata = Tabata({ round: 2 });
+				tabata.init();
+			});
+
+			describe('when tabata is a phase of pauseing', function () {
+				beforeEach(function () {
+					tabata.start();
+				});
+
+				it('should set round number', function () {
+					expect(roundNum.set).toHaveBeenCalledWith(2);					
+				});
+
+				it('should set round', function () {
+					expect(round.set).toHaveBeenCalledWith(['*', '*']);					
+				});
+			});
+		});
 	});
 });
