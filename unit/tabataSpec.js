@@ -1,7 +1,8 @@
 describe('Tabata', function () {
 	var count, round, roundNum;
+	var audio;
     function facultyCount () {
-        var counter = jasmine.createSpyObj('counter', ['init', 'prefix', 'set', 'show', 'hide']);
+        var counter = jasmine.createSpyObj('counter', ['init', 'prefix', 'set', 'show', 'hide', 'get']);
         counter.init.and.returnValue(counter);
         counter.prefix.and.returnValue(counter);
         counter.set.and.returnValue(counter);
@@ -17,9 +18,15 @@ describe('Tabata', function () {
         spyOn(window, 'Count').and.callFake(function (params) {
         	return counter[params.name];
         });
-
+		audio = [];
 		window.Audio = jasmine.createSpy('audio');
-		window.Audio.and.callFake(function (param) { return param; });
+		window.Audio.and.callFake(function (param) { 
+			audio.push(jasmine.createSpy('play' + audio.length));
+			return {
+				name: param,
+				play: audio[audio.length - 1]
+			};
+		});
     });
 
     describe('option', function () {
@@ -156,13 +163,18 @@ describe('Tabata', function () {
 					'classList': classList
 				});
 
-				tabata = Tabata({ round: 2 });
+				tabata = Tabata({ round: 2, pause: 3 });
 				tabata.init();
 			});
 
 			describe('when tabata is a phase of pauseing', function () {
 				beforeEach(function () {
+					jasmine.clock().install();
 					tabata.start();
+				});
+
+				afterEach(function () {
+					jasmine.clock().uninstall();
 				});
 
 				it('should set round number', function () {
@@ -171,6 +183,30 @@ describe('Tabata', function () {
 
 				it('should set round', function () {
 					expect(round.set).toHaveBeenCalledWith(['*', '*']);					
+				});
+
+				it('should set count to pause seconds', function () {
+					expect(count.set).toHaveBeenCalledWith(3);
+				});
+
+				it('should add class to background', function () {
+					expect(document.querySelector).toHaveBeenCalledWith('.main');
+					expect(classList.add).toHaveBeenCalledWith('relax');
+				});
+
+				describe('if second greater than 0', function () {
+					beforeEach(function () {
+						count.get.and.returnValue([2]);
+						jasmine.clock().tick(1001);
+					});
+					
+					it('should decrease second', function () {
+						expect(count.set.calls.mostRecent().args[0]).toEqual([1]);
+					});
+
+					it('should play sounds for relax', function () {
+						expect(audio[1]).toHaveBeenCalled();
+					});
 				});
 			});
 		});
