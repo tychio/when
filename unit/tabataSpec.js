@@ -167,7 +167,7 @@ describe('Tabata', function () {
 				tabata.init();
 			});
 
-			describe('when tabata is a phase of pauseing', function () {
+			describe('starting', function () {
 				beforeEach(function () {
 					jasmine.clock().install();
 					tabata.start();
@@ -177,24 +177,26 @@ describe('Tabata', function () {
 					jasmine.clock().uninstall();
 				});
 
-				it('should set round number', function () {
-					expect(roundNum.set).toHaveBeenCalledWith(2);					
+				describe('when before pause', function () {
+					it('should set round number', function () {
+						expect(roundNum.set).toHaveBeenCalledWith(2);					
+					});
+
+					it('should set round', function () {
+						expect(round.set).toHaveBeenCalledWith(['*', '*']);					
+					});
+
+					it('should set count to pause seconds', function () {
+						expect(count.set).toHaveBeenCalledWith(3);
+					});
+
+					it('should add class to background', function () {
+						expect(document.querySelector).toHaveBeenCalledWith('.main');
+						expect(classList.add).toHaveBeenCalledWith('relax');
+					});
 				});
 
-				it('should set round', function () {
-					expect(round.set).toHaveBeenCalledWith(['*', '*']);					
-				});
-
-				it('should set count to pause seconds', function () {
-					expect(count.set).toHaveBeenCalledWith(3);
-				});
-
-				it('should add class to background', function () {
-					expect(document.querySelector).toHaveBeenCalledWith('.main');
-					expect(classList.add).toHaveBeenCalledWith('relax');
-				});
-
-				describe('if second greater than 0', function () {
+				describe('when pause', function () {
 					beforeEach(function () {
 						count.get.and.returnValue([2]);
 						jasmine.clock().tick(1001);
@@ -206,6 +208,26 @@ describe('Tabata', function () {
 
 					it('should play sounds for relax', function () {
 						expect(audio[1]).toHaveBeenCalled();
+					});
+				});
+
+				describe('when end pause', function () {
+					beforeEach(function () {
+						count.get.and.returnValue([1]);
+						jasmine.clock().tick(1001);
+					});
+					
+					it('should decrease second to zero', function () {
+						expect(count.set).toHaveBeenCalledWith([0]);
+					});
+
+					it('should play sounds for end of relax', function () {
+						expect(audio[3]).toHaveBeenCalled();
+					});
+
+					it('should clear style of relax', function () {
+						expect(document.querySelector).toHaveBeenCalledWith('.main');
+						expect(classList.remove).toHaveBeenCalledWith('relax');
 					});
 				});
 			});
