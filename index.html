@@ -35,19 +35,26 @@
     <script type="text/javascript" src="js/tabata.js"></script>
     <script type="text/javascript" src="js/timer.js"></script>
     <script type="text/javascript" charset="utf-8">
+        var tabataMod = false;
         var timer = Timer();
         timer.start();
-        var tabata = Tabata().init();
-        var tabataMod = false;
+        var tabata = Tabata({
+            onEnd: toTimerMod
+        }).init();
         Wind(function (angle) {
-            if (tabataMod) {
-                tabataMod = false;
-                tabata.hide().stop();
-            } else {
-                tabataMod = true;
-                tabata.show().start();
-            }
+            tabataMod ? toTimerMod() : toTabataMod();
         });
+
+        function toTimerMod () {
+            tabataMod = false;
+            tabata.hide().stop();
+            timer.counter.show();
+        }
+        function toTabataMod () {
+            tabataMod = true;
+            tabata.show().start();
+            timer.counter.hide();
+        }
     </script>
 </body>
 </html>
