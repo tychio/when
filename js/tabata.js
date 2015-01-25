@@ -12,10 +12,10 @@ window.Tabata = (function (undefined) {
             name: 'time-number',
             bg: '.main',
             audio: {
-                'positive': new Audio('audio/gun.wav'),
-                'relax': new Audio('audio/gun.wav'),
-                'end-positive': new Audio('audio/end.wav'),
-                'end-relax': new Audio('audio/end.wav')
+                'positive': new Audio('audio/do.wav'),
+                'relax': new Audio('audio/re.wav'),
+                'end-positive': new Audio('audio/disable.wav'),
+                'end-relax': new Audio('audio/enable.wav')
             },
             onEnd: function () {}
         };
@@ -139,6 +139,7 @@ window.Tabata = (function (undefined) {
         function _playSound (p_name) {
             var audio = options.audio[p_name];
             audio.currentTime = 0;
+            audio.load();
             audio.play();
         }
 

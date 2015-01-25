@@ -13,8 +13,10 @@ module.exports = function (grunt) {
         'font/moztt_regular-webfont.woff',
         'font/moztt_medium-webfont.woff',
         'font/moztt_light-webfont.woff',
-        'audio/end.wav',
-        'audio/gun.wav'
+        'audio/do.wav',
+        'audio/re.wav',
+        'audio/disable.wav',
+        'audio/enable.wav'
     ];
     grunt.initConfig({
         watch: {

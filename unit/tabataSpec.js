@@ -24,7 +24,8 @@ describe('Tabata', function () {
 			audio.push(jasmine.createSpy('play' + audio.length));
 			return {
 				name: param,
-				play: audio[audio.length - 1]
+				play: audio[audio.length - 1],
+				load: jasmine.createSpy('loadAudio')
 			};
 		});
     });
@@ -36,19 +37,19 @@ describe('Tabata', function () {
 
     	describe('audio', function () {
     		it('should new a audio for positive', function () {
-    			expect(window.Audio.calls.all()[0].args[0]).toEqual('audio/gun.wav');
+    			expect(window.Audio.calls.all()[0].args[0]).toEqual('audio/do.wav');
     		});
 
     		it('should new a audio for relax', function () {
-    			expect(window.Audio.calls.all()[1].args[0]).toEqual('audio/gun.wav');
+    			expect(window.Audio.calls.all()[1].args[0]).toEqual('audio/re.wav');
     		});
 
     		it('should new a audio for end of positive', function () {
-    			expect(window.Audio.calls.all()[2].args[0]).toEqual('audio/end.wav');
+    			expect(window.Audio.calls.all()[2].args[0]).toEqual('audio/disable.wav');
     		});
 
     		it('should new a audio for end of relax', function () {
-    			expect(window.Audio.calls.all()[3].args[0]).toEqual('audio/end.wav');
+    			expect(window.Audio.calls.all()[3].args[0]).toEqual('audio/enable.wav');
     		});
     	});
     });
