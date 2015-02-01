@@ -38,6 +38,7 @@ window.Tabata = (function (undefined) {
                 className: options.name,
                 handler: '.time-cycle'
             }).init();
+
             roundNum = Count({
                 name: 'tabata-round-num',
                 handler: '#count-set',
@@ -75,7 +76,6 @@ window.Tabata = (function (undefined) {
 
         function startTabata () {
             _pause(options.round);
-
             return api;
         }
 

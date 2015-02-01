@@ -23,7 +23,6 @@ describe('Timer', function () {
             expect(timer.start).toBeDefined();
             expect(timer.stop).toBeDefined();
         });
-
         describe('start', function () {
             it('return api', function () {
                 var timer = Timer().start();
