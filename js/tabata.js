@@ -9,6 +9,7 @@ window.Tabata = (function (undefined) {
             round: 8,
             train: 20,
             pause: 10,
+            discount: 3,
             name: 'time-number',
             bg: '.main',
             audio: {
@@ -113,15 +114,16 @@ window.Tabata = (function (undefined) {
             _clear();
             timeout = setInterval(function () {
                 var values = count.get();
-                if (values[0] > 0) {
-                    values[0] -= 1;
+                values[0] -= 1;
+                if (values[0] >= 0) {
                     count.set(values);
-                    _playSound(p_class);
                 }
-                if (values[0] <= 0) {
+                if (values[0] < 0) {
                     _playSound('end-' + p_class);
                     _clear();
                     p_end();
+                } else if (values[0] <= options.discount) {
+                    _playSound(p_class);
                 }
             }, 1000);
             document.querySelector(options.bg).classList.add(p_class);
