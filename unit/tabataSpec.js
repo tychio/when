@@ -222,13 +222,20 @@ describe('Tabata', function () {
 						expect(count.set).toHaveBeenCalledWith([0]);
 					});
 
-					it('should play sounds for end of relax', function () {
-						expect(audio[3]).toHaveBeenCalled();
-					});
-
 					it('should clear style of relax', function () {
 						expect(document.querySelector).toHaveBeenCalledWith('.main');
 						expect(classList.remove).toHaveBeenCalledWith('relax');
+					});
+				});
+
+				describe('when before train', function () {
+					beforeEach(function () {
+						count.get.and.returnValue([1]);
+						jasmine.clock().tick(2001);
+					});
+					
+					it('should play sounds for end of relax', function () {
+						expect(audio[3]).toHaveBeenCalled();
 					});
 				});
 			});
