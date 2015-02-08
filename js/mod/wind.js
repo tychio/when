@@ -29,7 +29,7 @@ window.Wind = (function (undefined) {
         options.main.addEventListener('touchmove', rotate, false);
         options.main.addEventListener('touchend', touchUp, false);
         options.main.addEventListener('touchcancel', touchUp, false);
-        options.main.addEventListener('click', touchUp, false);
+        options.panel.addEventListener('click', touchUp, false);
 
         // to rotate the alarm pointer on move touch.
         function rotate (p_event) {
