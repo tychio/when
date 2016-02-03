@@ -13,7 +13,7 @@ window.Wind = (function (undefined) {
             panel: document.querySelector('.time-panel'),
             plate: document.querySelector('.upside'),
             main: document.querySelector('.main'),
-            alarmPointer: document.querySelector('.time-alarm')
+            pointer: document.querySelector('.time-alarm')
         };
 
         if (typeof opt === 'function') {
@@ -36,7 +36,7 @@ window.Wind = (function (undefined) {
             p_event.preventDefault();
 
             touch = true;
-            options.alarmPointer.style.display = 'block';
+            options.pointer.style.display = 'block';
             var touchPos = p_event.touches[0];
             var rotate = _calculateRotate(touchPos.pageX, touchPos.pageY, options.plate.clientWidth*0.5, options.plate.clientHeight*0.5);
             _setRotateStyle(rotate);
@@ -55,8 +55,8 @@ window.Wind = (function (undefined) {
 
         function _touch (p_event) {
             touch = false;
-            options.alarmPointer.style.display = 'none';
-            var _transform = options.alarmPointer.style.transform;
+            options.pointer.style.display = 'none';
+            var _transform = options.pointer.style.transform;
             var _rotate = /(rotate[\s]*\()([\d.]+)/.exec(_transform);
             if (_rotate && _rotate[2]) {
                 var angle = _rotate[2];
