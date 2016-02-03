@@ -74,27 +74,8 @@ window.Wind = (function (undefined) {
                 if (_prefix[i].length > 0) {
                     _prefix[i] = '-' + _prefix[i] + '-';
                 }
-                options.alarmPointer.style[_prefix[i] + 'transform'] = 'rotate(' + p_rotate + 'deg)';
+                options.pointer.style[_prefix[i] + 'transform'] = 'rotate(' + p_rotate + 'deg)';
             }
-        }
-
-        function _setAlarm (angle) {
-            var ALARM_NAME = 'only_alarm';
-            var _alarmTime = new Date();
-            var _alarmSeconds = (angle/360 + 1)*12*60*60*1000;
-            _alarmTime.setHours(0);
-            _alarmTime.setMinutes(0);
-            _alarmTime.setSeconds(0);
-            _alarmTime.setMilliseconds(_alarmSeconds);
-            if (_alarmTime.getTime() < (new Date()).getTime()) {// past time
-                _alarmTime.setHours(_alarmTime.getHours() + 12);
-            }
-            var _addAlarm = navigator.mozAlarms.add(_alarmTime, ALARM_NAME);
-            _addAlarm.onsuccess = function () {
-                this.result.forEach(function (p_alarm) {
-                    alert(p_alarm.date);
-                });
-            };
         }
     }
 })();
