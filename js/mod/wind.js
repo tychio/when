@@ -10,10 +10,10 @@ window.Wind = (function (undefined) {
         var options = {
             rotate: function () {},
             tap: function () {},
-            panel: document.querySelector('.time-panel'),
+            panel: document.querySelector('.time-cycle'),
             plate: document.querySelector('.upside'),
             main: document.querySelector('.main'),
-            alarmPointer: document.querySelector('.time-alarm')
+            pointer: document.querySelector('.time-alarm')
         };
 
         if (typeof opt === 'function') {
@@ -36,7 +36,7 @@ window.Wind = (function (undefined) {
             p_event.preventDefault();
 
             touch = true;
-            options.alarmPointer.style.display = 'block';
+            options.pointer.style.display = 'block';
             var touchPos = p_event.touches[0];
             var rotate = _calculateRotate(touchPos.pageX, touchPos.pageY, options.plate.clientWidth*0.5, options.plate.clientHeight*0.5);
             _setRotateStyle(rotate);
@@ -55,8 +55,8 @@ window.Wind = (function (undefined) {
 
         function _touch (p_event) {
             touch = false;
-            options.alarmPointer.style.display = 'none';
-            var _transform = options.alarmPointer.style.transform;
+            options.pointer.style.display = 'none';
+            var _transform = options.pointer.style.transform;
             var _rotate = /(rotate[\s]*\()([\d.]+)/.exec(_transform);
             if (_rotate && _rotate[2]) {
                 var angle = _rotate[2];
@@ -74,27 +74,8 @@ window.Wind = (function (undefined) {
                 if (_prefix[i].length > 0) {
                     _prefix[i] = '-' + _prefix[i] + '-';
                 }
-                options.alarmPointer.style[_prefix[i] + 'transform'] = 'rotate(' + p_rotate + 'deg)';
+                options.pointer.style[_prefix[i] + 'transform'] = 'rotate(' + p_rotate + 'deg)';
             }
-        }
-
-        function _setAlarm (angle) {
-            var ALARM_NAME = 'only_alarm';
-            var _alarmTime = new Date();
-            var _alarmSeconds = (angle/360 + 1)*12*60*60*1000;
-            _alarmTime.setHours(0);
-            _alarmTime.setMinutes(0);
-            _alarmTime.setSeconds(0);
-            _alarmTime.setMilliseconds(_alarmSeconds);
-            if (_alarmTime.getTime() < (new Date()).getTime()) {// past time
-                _alarmTime.setHours(_alarmTime.getHours() + 12);
-            }
-            var _addAlarm = navigator.mozAlarms.add(_alarmTime, ALARM_NAME);
-            _addAlarm.onsuccess = function () {
-                this.result.forEach(function (p_alarm) {
-                    alert(p_alarm.date);
-                });
-            };
         }
     }
 })();
