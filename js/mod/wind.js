@@ -10,7 +10,7 @@ window.Wind = (function (undefined) {
         var options = {
             rotate: function () {},
             tap: function () {},
-            panel: document.querySelector('.time-panel'),
+            panel: document.querySelector('.time-cycle'),
             plate: document.querySelector('.upside'),
             main: document.querySelector('.main'),
             pointer: document.querySelector('.time-alarm')
