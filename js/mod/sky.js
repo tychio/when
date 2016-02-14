@@ -1,8 +1,5 @@
 var Sky = (function (undefined) {
     'use strict';
-    function _atTimeZone (p_hour, p_start, p_end) {
-        return (p_hour - p_start)*(p_end - p_hour) > 0;
-    }
 	return function (opt) {
         var $velarium;
 
@@ -25,20 +22,33 @@ var Sky = (function (undefined) {
             return api;
         }
 
-        function setSkyColor (p_month, p_hour) {
-            var sunrise = 8;
-            var sunset = 18;
-            if (_atTimeZone(p_month, 3, 11)) {// summer
-                sunrise = 6;
-                sunset = 20;
-            }
-            if (_atTimeZone(p_hour, sunrise, sunset)) {// daytime
-                $velarium.classList.remove(options.darkClass);
-            } else {// night
-                $velarium.classList.add(options.darkClass);
-            }
+        function setSkyColor (p_now) {
+            _geo(function (lat, lon) {
+                Ajax.get('http://api.openweathermap.org/data/2.5/weather', {
+                    lat: lat,
+                    lon: lon,
+                    APPID: 'ea8ca31e66f3c7cbbf5434f1d072d8c2',
+                }, function (data) {
+                    var sunrise = new Date(data.sys.sunrise*1000);
+                    var sunset = new Date(data.sys.sunset*1000);
+                    if (p_now > sunrise && p_now < sunset) {
+                        $velarium.classList.remove(options.darkClass);
+                    } else {
+                        $velarium.classList.add(options.darkClass);
+                    }
+                    
+                });
+            });
 
             return api;
+        }
+
+        function _geo (callback) {
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    callback(position.coords.latitude, position.coords.longitude);
+                });
+            }
         }
 
         return api;

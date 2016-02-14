@@ -2,8 +2,10 @@ window.Timer = (function (undefined) {
     'use strict';
     return function () {
         var timer;
+        var skyDebounce;
         var options = {
-            accuracy: 40 //ms
+            accuracy: 40, //ms
+            skyUpdate: 60*1000,
         };
 
         var api = {
@@ -17,6 +19,10 @@ window.Timer = (function (undefined) {
 
         function startTricle () {
             timer = setInterval(tricle, options.accuracy);
+            api.weather.set(new Date());
+            skyDebounce = setInterval(function () {
+                api.weather.set(new Date());
+            }, options.skyUpdate);
 
             return api;
         }
@@ -78,8 +84,6 @@ window.Timer = (function (undefined) {
             api.pointer.second.set(p_seconds + p_milliseconds / 1000);
             api.pointer.minute.set(p_minutes + p_seconds / 60);
             api.pointer.hour.set(p_hours + p_minutes / 60);
-
-            api.weather.set(p_months, p_hours);
         }
 
         return api;
