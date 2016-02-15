@@ -1,4 +1,4 @@
-window.Wind = (function (undefined) {
+define(function (require) {
     'use strict';
 
     function _calculateRotate (p_touch_x, p_touch_y, p_target_x, p_target_y) {
@@ -78,4 +78,4 @@ window.Wind = (function (undefined) {
             }
         }
     }
-})();
+});

@@ -1,5 +1,5 @@
 // update app for cache
-(function (undefined) {
+define(function (require) {
     if (navigator.onLine) {// online
         update();
     }
@@ -18,4 +18,4 @@
             }, false);
         }
     }
-})();
+});

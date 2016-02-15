@@ -1,4 +1,4 @@
-var Ajax = (function (undefined) {
+define(function (require) {
     'use strict';
 
     function _buildParams (params) {
@@ -27,4 +27,4 @@ var Ajax = (function (undefined) {
             request.send();
         }
     }
-})();
+});

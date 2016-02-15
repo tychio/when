@@ -1,5 +1,8 @@
-var Sky = (function (undefined) {
+define(function (require) {
     'use strict';
+
+    var Ajax = require('mod/ajax');
+
 	return function (opt) {
         var $velarium;
 
@@ -53,4 +56,4 @@ var Sky = (function (undefined) {
 
         return api;
 	};
-})();
+});

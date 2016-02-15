@@ -1,5 +1,8 @@
-window.Tabata = (function (undefined) {
+define(function (require) {
     'use strict';
+
+    var Count = require('mod/count');
+    
     return function (opt) {
         var count;
         var round;
@@ -147,4 +150,4 @@ window.Tabata = (function (undefined) {
 
         return api;
     };
-})();
+});

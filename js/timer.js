@@ -1,5 +1,10 @@
-window.Timer = (function (undefined) {
+define(function (require) {
     'use strict';
+
+    var Count = require('mod/count');
+    var Dial = require('mod/dial');
+    var Sky = require('mod/sky');
+
     return function () {
         var timer;
         var skyDebounce;
@@ -88,4 +93,4 @@ window.Timer = (function (undefined) {
 
         return api;
     }
-})();
+});

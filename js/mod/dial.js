@@ -1,4 +1,4 @@
-window.Dial = (function (undefined) {
+define(function (require) {
     'use strict';
     var PREFIXS = ['', 'moz', 'webkit'];
 	return function (opt) {
@@ -71,4 +71,4 @@ window.Dial = (function (undefined) {
 
 		return api;
 	};
-})();
+});

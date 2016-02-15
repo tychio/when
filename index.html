@@ -27,35 +27,6 @@
         </section>
     </main>
     <footer class="footer"></footer>
-    <script type="text/javascript" src="js/mod/ajax.js"></script>
-    <script type="text/javascript" src="js/mod/dial.js"></script>
-    <script type="text/javascript" src="js/mod/count.js"></script>
-    <script type="text/javascript" src="js/mod/sky.js"></script>
-    <script type="text/javascript" src="js/mod/wind.js"></script>
-    <script type="text/javascript" src="js/update.js"></script>
-    <script type="text/javascript" src="js/tabata.js"></script>
-    <script type="text/javascript" src="js/timer.js"></script>
-    <script type="text/javascript" charset="utf-8">
-        var tabataMod = false;
-        var timer = Timer();
-        timer.start();
-        var tabata = Tabata({
-            onEnd: toTimerMod
-        }).init();
-        Wind(function (angle) {
-            tabataMod ? toTimerMod() : toTabataMod();
-        });
-
-        function toTimerMod () {
-            tabataMod = false;
-            tabata.hide().stop();
-            timer.counter.show();
-        }
-        function toTabataMod () {
-            tabataMod = true;
-            tabata.show().start();
-            timer.counter.hide();
-        }
-    </script>
+    <script type="text/javascript" data-main="js/main" src="lib/requirejs/require.js"></script>
 </body>
 </html>

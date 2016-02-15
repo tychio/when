@@ -1,4 +1,4 @@
-window.Count = (function (undefined) {
+define(function (require) {
     'use strict';
 
     function _coverage (p_number, p_size) {
@@ -104,4 +104,4 @@ window.Count = (function (undefined) {
 
         return api;
 	}
-})();
+});
