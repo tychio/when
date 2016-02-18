@@ -9,9 +9,7 @@ define(function (require) {
             scope: 10
 		};
 
-        for (var key in opt) {
-            options[key] = opt[key];
-        }
+        options = $.extend(options, opt);
 
 		var api = {
             init: createElement,
@@ -30,13 +28,13 @@ define(function (require) {
         }
 
         function hidePointer () {
-            $pointer.style.display = 'none';
+            $pointer.hide();
 
             return api;
         }
 
         function showPointer () {
-            $pointer.style.display = 'block';
+            $pointer.show();
 
             return api;
         }
@@ -47,12 +45,11 @@ define(function (require) {
             return api;
         }
 
-        function _createElementAppendTo (elementName, className, containerClass) {
-            $pointer = document.createElement(elementName);
-            $pointer.classList.add(className);
-            $pointer.classList.add(options.name);
-            var _$plate = document.querySelector(containerClass);
-            _$plate.appendChild($pointer);
+        function _createElementAppendTo (elementName, className, containerSelector) {
+            $pointer = $('<' + elementName + '>');
+            $pointer.addClass(className);
+            $pointer.addClass(options.name);
+            $(containerSelector).append($pointer);
         }
 
         function _setTimePoint (p_time, p_width, p_scope, p_pointer) {
@@ -65,7 +62,7 @@ define(function (require) {
         function _setStyleWithPrefix (p_styleName, p_transform) {
             for (var i = 0; i < PREFIXS.length; i++) {
                 var _prefix = PREFIXS[i] === '' ? '' : '-' + PREFIXS[i] + '-';
-                this.style[_prefix + p_styleName] = p_transform;
+                this.css(_prefix + p_styleName, p_transform);
             }
         }
 

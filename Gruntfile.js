@@ -5,7 +5,6 @@ module.exports = function (grunt) {
         'js/update.js',
         'js/timer.js',
         'js/tabata.js',
-        'js/mod/ajax.js',
         'js/mod/count.js',
         'js/mod/dial.js',
         'js/mod/sky.js',

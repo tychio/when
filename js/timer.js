@@ -47,7 +47,7 @@ define(function (require) {
             var month = time.getMonth();
             setTimer(milliseconds, seconds, minutes, hours, month);
             // output datetime
-            document.querySelector('time').setAttribute('datetime', time.toLocaleString());
+            $('time').attr('datetime', time.toLocaleString());
         }
 
         function createTimer () {

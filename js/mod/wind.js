@@ -10,10 +10,10 @@ define(function (require) {
         var options = {
             rotate: function () {},
             tap: function () {},
-            panel: document.querySelector('.time-cycle'),
-            plate: document.querySelector('.upside'),
-            main: document.querySelector('.main'),
-            pointer: document.querySelector('.time-alarm')
+            panel: $('.time-cycle'),
+            plate: $('.upside'),
+            main: $('.main'),
+            pointer: $('.time-alarm')
         };
 
         if (typeof opt === 'function') {
@@ -26,17 +26,18 @@ define(function (require) {
 
         var touch = false;
 
-        options.main.addEventListener('touchmove', rotate, false);
-        options.main.addEventListener('touchend', touchUp, false);
-        options.main.addEventListener('touchcancel', touchUp, false);
-        options.panel.addEventListener('click', touchUp, false);
+        options.main
+            .on('touchmove', rotate)
+            .on('touchend', touchUp)
+            .on('touchcancel', touchUp);
+        options.panel.on('click', touchUp);
 
         // to rotate the alarm pointer on move touch.
         function rotate (p_event) {
             p_event.preventDefault();
 
             touch = true;
-            options.pointer.style.display = 'block';
+            options.pointer.show();
             var touchPos = p_event.touches[0];
             var rotate = _calculateRotate(touchPos.pageX, touchPos.pageY, options.plate.clientWidth*0.5, options.plate.clientHeight*0.5);
             _setRotateStyle(rotate);
@@ -55,8 +56,8 @@ define(function (require) {
 
         function _touch (p_event) {
             touch = false;
-            options.pointer.style.display = 'none';
-            var _transform = options.pointer.style.transform;
+            options.pointer.hide();
+            var _transform = options.pointer.css('transform');
             var _rotate = /(rotate[\s]*\()([\d.]+)/.exec(_transform);
             if (_rotate && _rotate[2]) {
                 var angle = _rotate[2];
@@ -74,7 +75,7 @@ define(function (require) {
                 if (_prefix[i].length > 0) {
                     _prefix[i] = '-' + _prefix[i] + '-';
                 }
-                options.pointer.style[_prefix[i] + 'transform'] = 'rotate(' + p_rotate + 'deg)';
+                options.pointer.css(_prefix[i] + 'transform', 'rotate(' + p_rotate + 'deg)');
             }
         }
     }

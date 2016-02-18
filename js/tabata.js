@@ -14,7 +14,7 @@ define(function (require) {
             pause: 10,
             discount: 3,
             name: 'time-number',
-            bg: '.main',
+            bgSelector: '.main',
             audio: {
                 'positive': new Audio('audio/do.wav'),
                 'relax': new Audio('audio/re.wav'),
@@ -24,9 +24,7 @@ define(function (require) {
             onEnd: function () {}
         };
 
-        for (var key in opt) {
-            options[key] = opt[key];
-        }
+        options = $.extend(options, opt);
 
         var api = {
             init: initTabata,
@@ -90,8 +88,8 @@ define(function (require) {
 
         function _clear () {
             clearInterval(timeout);
-            document.querySelector(options.bg).classList.remove('positive');
-            document.querySelector(options.bg).classList.remove('relax');
+            $(options.bgSelector).removeClass('positive');
+            $(options.bgSelector).removeClass('relax');
         }
 
         function _train (discount) {
@@ -129,7 +127,7 @@ define(function (require) {
                     _playSound(p_class);
                 }
             }, 1000);
-            document.querySelector(options.bg).classList.add(p_class);
+            $(options.bgSelector).addClass(p_class);
         }
 
         function _setRound (p_round) {

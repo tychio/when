@@ -1,4 +1,4 @@
-requirejs(['./update', './timer', './tabata', 'mod/wind'], function (Update, Timer, Tabata, Wind) {
+requirejs(['./update', './timer', './tabata', 'mod/wind', '../lib/jquery/dist/jquery.min'], function (Update, Timer, Tabata, Wind) {
     var tabataMod = false;
     var timer = Timer();
     timer.start();
