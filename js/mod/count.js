@@ -82,8 +82,12 @@ define(function (require) {
         }
 
         function showCounter () {
-        	$counter.height($counter.css('max-height'));
-        	$counter.css('opacity', 1);
+            var height = $counter.css('max-height');
+            height = height == 'none' ? '' : height;
+        	$counter.css({
+                height: height,
+        	    opacity: 1
+            });
 
         	return api;
         }
