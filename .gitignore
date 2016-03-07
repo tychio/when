@@ -173,4 +173,4 @@ pip-log.txt
 .grunt
 
 #Bower library
-lib/
+lib
