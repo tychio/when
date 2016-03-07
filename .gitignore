@@ -171,3 +171,6 @@ pip-log.txt
 
 #GruntJS
 .grunt
+
+#Bower library
+lib/
