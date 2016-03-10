@@ -20,7 +20,7 @@ define(function (require) {
 
         function createElement (name) {
             options.name = name || options.name;
-            $pointer && $pointer.remove && $pointer.remove(); 
+            $pointer && $pointer.remove && $pointer.remove();
 
             _createElementAppendTo('span', 'time-point', '#dial-set');
 

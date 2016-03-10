@@ -67,11 +67,23 @@ module.exports = function (grunt) {
             }
         },
         jasmine: {
-            src: ['js/mod/*.js', 'js/tabata.js', 'js/timer.js'],
+            src: [
+                '../audio/*'
+            ],
             options: {
                 keepRunner: true,
                 outfile: 'unit/runner.html',
-                specs: 'unit/*Spec.js'
+                specs: 'unit/*Spec.js',
+                template: require('grunt-template-jasmine-requirejs'),
+                templateOptions: {
+                    requireConfigFile: 'js/main.js',
+                    requireConfig: {
+                        baseUrl: '../js',
+                        paths: {
+                            'jquery': '../lib/jquery/dist/jquery.min'
+                        }
+                    }
+                }
             }
         }
     });

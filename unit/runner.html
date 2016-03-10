@@ -3,16 +3,18 @@
 <head>
   <meta charset="utf-8">
   <title>Jasmine Spec Runner</title>
-  <link rel="shortcut icon" type="image/png" href=".grunt/grunt-contrib-jasmine/jasmine_favicon.png">
-
-  <link rel="stylesheet" type="text/css" href="../.grunt/grunt-contrib-jasmine/jasmine.css">
-
-
-</head>
-<body>
 
   
-  <script src="../.grunt/grunt-contrib-jasmine/es5-shim.js"></script>
+  <link rel="stylesheet" type="text/css" href="../.grunt/grunt-contrib-jasmine/jasmine.css">
+  
+
+  
+  
+  
+
+  <script src="../.grunt/grunt-contrib-jasmine/require.js"></script>
+
+  
   
   <script src="../.grunt/grunt-contrib-jasmine/jasmine.js"></script>
   
@@ -22,26 +24,58 @@
   
   <script src="../.grunt/grunt-contrib-jasmine/boot.js"></script>
   
-  <script src="../js/mod/ajax.js"></script>
-  
-  <script src="../js/mod/count.js"></script>
-  
-  <script src="../js/mod/dial.js"></script>
-  
-  <script src="../js/mod/sky.js"></script>
-  
-  <script src="../js/mod/wind.js"></script>
-  
-  <script src="../js/tabata.js"></script>
-  
-  <script src="../js/timer.js"></script>
-  
-  <script src="tabataSpec.js"></script>
-  
-  <script src="timerSpec.js"></script>
-  
-  <script src="../.grunt/grunt-contrib-jasmine/reporter.js"></script>
   
 
+  <script>
+    require.onError = function(error) {
+      var message = error.requireType + ': ';
+      if (error.requireType === 'scripterror' || error.requireType === 'notloaded' && error.requireModules) {
+        message += 'Illegal path or script error: ' + '[\'' + error.requireModules.join("', '") + '\']';
+      } else {
+        message += error.message;
+      }
+
+      throw Error(message);
+    };
+  </script>
+
+  <script>
+    
+
+    
+      require.config({
+  "baseUrl": "../js",
+  "paths": {
+    "jquery": "../lib/jquery/dist/jquery.min"
+  }
+});
+    
+  </script>
+
+  <script>
+    // Delay onLoad function until we are ready
+    var startTests = window.onload;
+    window.onload = null;
+
+    function launchTest() {
+    require([
+      
+    ],
+    function(){
+      require(['tabataSpec.js','timerSpec.js','../.grunt/grunt-contrib-jasmine/reporter.js'], function(){
+        startTests();
+      });
+    }
+    )
+  }
+  </script>
+
+  
+  <script>
+  launchTest();
+  </script>
+  
+</head>
+<body>
 </body>
 </html>
