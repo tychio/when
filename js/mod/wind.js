@@ -27,10 +27,11 @@ define(['jquery'], function ($) {
         var touch = false;
 
         options.main
-            .on('touchmove', rotate)
+            .on('touchmove', rotate);
+        options.panel
             .on('touchend', touchUp)
-            .on('touchcancel', touchUp);
-        options.panel.on('click', touchUp);
+            .on('touchcancel', touchUp)
+            .on('click', touchUp);
 
         // to rotate the alarm pointer on move touch.
         function rotate (p_event) {
