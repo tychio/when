@@ -1,9 +1,5 @@
-define(function (require) {
+define(['jquery', 'mod/count', 'mod/dial', 'mod/sky'], function ($, Count, Dial, Sky) {
     'use strict';
-
-    var Count = require('mod/count');
-    var Dial = require('mod/dial');
-    var Sky = require('mod/sky');
 
     return function () {
         var timer;

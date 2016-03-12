@@ -1,8 +1,6 @@
-define(function (require) {
+define(['jquery', 'mod/count'], function ($, Count) {
     'use strict';
 
-    var Count = require('mod/count');
-    
     return function (opt) {
         var count;
         var round;

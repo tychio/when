@@ -1,4 +1,4 @@
-define(function (require) {
+define(['jquery'], function ($) {
     'use strict';
     var PREFIXS = ['', 'moz', 'webkit'];
 	return function (opt) {

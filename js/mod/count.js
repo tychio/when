@@ -1,4 +1,4 @@
-define(function (require) {
+define(['jquery'], function ($) {
     'use strict';
 
     function _coverage (p_number, p_size) {
@@ -14,7 +14,7 @@ define(function (require) {
         var $span = $('<span>');
         return $span.html(content);
     }
-    
+
 	return function (opt) {
 		var $counter;
         var values;
@@ -56,7 +56,7 @@ define(function (require) {
             }
 
             $counter.empty();
-        	
+
             $.each(values, function (index, val) {
                 var $value = _wrapSpan(_coverage(val, options.digit));
                 $counter.append($value.add(_wrapSpan(options.division)));

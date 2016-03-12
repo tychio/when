@@ -80,6 +80,7 @@ module.exports = function (grunt) {
                     requireConfig: {
                         baseUrl: '../js',
                         paths: {
+                            'helper': '../unit/helper',
                             'jquery': '../lib/jquery/dist/jquery.min'
                         }
                     }

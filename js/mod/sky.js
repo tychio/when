@@ -1,4 +1,4 @@
-define(function (require) {
+define(['jquery'], function ($) {
     'use strict';
     var cache = {};
 
@@ -9,9 +9,9 @@ define(function (require) {
 			handler: '.main',
 			darkClass: 'dark'
 		};
-        
+
         options = $.extend(options, opt);
-		
+
         var api = {
         	init: initSky,
         	set: setSkyColor
