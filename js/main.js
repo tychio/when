@@ -1,11 +1,12 @@
 requirejs.config({
     baseUrl: 'js',
     paths: {
-        jquery: '../lib/jquery/dist/jquery.min'
+        jquery: '../lib/jquery/dist/jquery.min',
+        audiojs: '../lib/audiojs/audiojs/audio'
     }
 });
 
-requirejs(['jquery', 'update', 'timer', 'tabata', 'mod/wind'], function ($, Update, Timer, Tabata, Wind) {
+requirejs(['jquery', 'update', 'timer', 'tabata', 'mod/wind', 'audiojs'], function ($, Update, Timer, Tabata, Wind) {
     var tabataMod = false;
     var timer = Timer();
     timer.start();

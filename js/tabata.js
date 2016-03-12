@@ -6,6 +6,7 @@ define(['jquery', 'mod/count'], function ($, Count) {
         var round;
         var roundNum;
         var timeout;
+        var sounds = {};
         var options = {
             round: 8,
             train: 20,
@@ -14,10 +15,10 @@ define(['jquery', 'mod/count'], function ($, Count) {
             name: 'time-number',
             bgSelector: '.main',
             audio: {
-                'positive': new Audio('audio/do.wav'),
-                'relax': new Audio('audio/re.wav'),
-                'end-positive': new Audio('audio/disable.wav'),
-                'end-relax': new Audio('audio/enable.wav')
+                'positive': 'audio/do.wav',
+                'relax': 'audio/re.wav',
+                'end-positive': 'audio/disable.wav',
+                'end-relax': 'audio/enable.wav'
             },
             onEnd: function () {}
         };
@@ -54,6 +55,8 @@ define(['jquery', 'mod/count'], function ($, Count) {
                 division: '',
                 hidden: true
             }).init();
+
+            _loadSounds();
 
             return api;
         }
@@ -138,10 +141,26 @@ define(['jquery', 'mod/count'], function ($, Count) {
         }
 
         function _playSound (p_name) {
-            var audio = options.audio[p_name];
-            audio.currentTime = 0;
-            audio.load();
+            var audio = sounds[p_name];
             audio.play();
+        }
+
+        function _loadSounds () {
+            for (name in options.audio) {
+                var path = options.audio[name];
+                var elm = _createAudioElm(path);
+                sounds[name] = audiojs.create(elm)[0];
+            }
+        }
+
+        function _createAudioElm (path) {
+            var elm = $('<audio>');
+            elm.attr({
+                'preload': 'auto',
+                'src': path
+            });
+            $('footer').append(elm);
+            return elm;
         }
 
         return api;
