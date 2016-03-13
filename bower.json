@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "jquery": "^2.2.1",
-    "requirejs": "~2.1.22"
+    "requirejs": "~2.1.22",
+    "audiojs": "^1.0.1"
   }
 }
