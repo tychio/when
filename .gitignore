@@ -174,3 +174,6 @@ pip-log.txt
 
 #Bower library
 lib
+
+#build
+css/*.css
