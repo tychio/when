@@ -1,8 +1,7 @@
-var Sky = (function (undefined) {
+define(['jquery'], function ($) {
     'use strict';
-    function _atTimeZone (p_hour, p_start, p_end) {
-        return (p_hour - p_start)*(p_end - p_hour) > 0;
-    }
+    var cache = {};
+
 	return function (opt) {
         var $velarium;
 
@@ -10,37 +9,56 @@ var Sky = (function (undefined) {
 			handler: '.main',
 			darkClass: 'dark'
 		};
-        for (var key in opt) {
-            options[key] = opt[key];
-        }
-		
+
+        options = $.extend(options, opt);
+
         var api = {
         	init: initSky,
         	set: setSkyColor
         };
 
         function initSky () {
-        	$velarium = document.querySelector(options.handler);
+        	$velarium = $(options.handler);
 
             return api;
         }
 
-        function setSkyColor (p_month, p_hour) {
-            var sunrise = 8;
-            var sunset = 18;
-            if (_atTimeZone(p_month, 3, 11)) {// summer
-                sunrise = 6;
-                sunset = 20;
-            }
-            if (_atTimeZone(p_hour, sunrise, sunset)) {// daytime
-                $velarium.classList.remove(options.darkClass);
-            } else {// night
-                $velarium.classList.add(options.darkClass);
-            }
+        function setSkyColor (p_now) {
+            _geo(function (lat, lon) {
+                if (!cache['sunrise']) {
+                    $.get('http://api.openweathermap.org/data/2.5/weather', {
+                        lat: lat,
+                        lon: lon,
+                        APPID: 'ea8ca31e66f3c7cbbf5434f1d072d8c2',
+                    }, function (data) {
+                        cache['sunrise'] = new Date(data.sys.sunrise*1000);
+                        cache['sunset'] = new Date(data.sys.sunset*1000);
+                        _updateSky(p_now);
+                    });
+                } else {
+                    _updateSky(p_now);
+                }
+            });
 
             return api;
+        }
+
+        function _updateSky (p_now) {
+            if (p_now > cache['sunrise'] && p_now < cache['sunset']) {
+                $velarium.removeClass(options.darkClass);
+            } else {
+                $velarium.addClass(options.darkClass);
+            }
+        }
+
+        function _geo (callback) {
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    callback(position.coords.latitude, position.coords.longitude);
+                });
+            }
         }
 
         return api;
 	};
-})();
+});

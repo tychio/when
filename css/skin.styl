@@ -148,7 +148,7 @@ transition(p_target, p_second)
             font-size $sizeFont
             transition all, $timeSwitch
             span
-                padding 0 $sizeSpace               
+                padding 0 $sizeSpace
                 color $colorLightText
                 transition color $timeAlternate
             &#tabata-round
@@ -181,7 +181,7 @@ transition(p_target, p_second)
         .section
             &.downside .time-count span
                 color $colorOtherText
-            &.upside .time-cycle 
+            &.upside .time-cycle
                 .time-point
                     &.point_second
                         background $colorOtherPointer
@@ -195,14 +195,16 @@ transition(p_target, p_second)
     &.positive
         background $colorPositive
         .section
-            &.upside .time-cycle 
+            &.upside .time-cycle
                 .time-panel
                     background $colorPositive
     &.relax
         background $colorRelax
         .section
-            &.upside .time-cycle 
+            &.upside .time-cycle
                 .time-panel
                     background $colorRelax
 .footer
     z-index 11000
+    .audiojs
+        display: none;

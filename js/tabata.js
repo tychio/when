@@ -1,29 +1,29 @@
-window.Tabata = (function (undefined) {
+define(['jquery', 'mod/count'], function ($, Count) {
     'use strict';
+
     return function (opt) {
         var count;
         var round;
         var roundNum;
         var timeout;
+        var sounds = {};
         var options = {
             round: 8,
             train: 20,
             pause: 10,
             discount: 3,
             name: 'time-number',
-            bg: '.main',
+            bgSelector: '.main',
             audio: {
-                'positive': new Audio('audio/do.wav'),
-                'relax': new Audio('audio/re.wav'),
-                'end-positive': new Audio('audio/disable.wav'),
-                'end-relax': new Audio('audio/enable.wav')
+                'positive': 'audio/do.wav',
+                'relax': 'audio/re.wav',
+                'end-positive': 'audio/disable.wav',
+                'end-relax': 'audio/enable.wav'
             },
             onEnd: function () {}
         };
 
-        for (var key in opt) {
-            options[key] = opt[key];
-        }
+        options = $.extend(options, opt);
 
         var api = {
             init: initTabata,
@@ -56,6 +56,8 @@ window.Tabata = (function (undefined) {
                 hidden: true
             }).init();
 
+            _loadSounds();
+
             return api;
         }
 
@@ -87,8 +89,8 @@ window.Tabata = (function (undefined) {
 
         function _clear () {
             clearInterval(timeout);
-            document.querySelector(options.bg).classList.remove('positive');
-            document.querySelector(options.bg).classList.remove('relax');
+            $(options.bgSelector).removeClass('positive');
+            $(options.bgSelector).removeClass('relax');
         }
 
         function _train (discount) {
@@ -126,7 +128,7 @@ window.Tabata = (function (undefined) {
                     _playSound(p_class);
                 }
             }, 1000);
-            document.querySelector(options.bg).classList.add(p_class);
+            $(options.bgSelector).addClass(p_class);
         }
 
         function _setRound (p_round) {
@@ -139,12 +141,28 @@ window.Tabata = (function (undefined) {
         }
 
         function _playSound (p_name) {
-            var audio = options.audio[p_name];
-            audio.currentTime = 0;
-            audio.load();
+            var audio = sounds[p_name];
             audio.play();
+        }
+
+        function _loadSounds () {
+            for (name in options.audio) {
+                var path = options.audio[name];
+                var elm = _createAudioElm(path);
+                sounds[name] = audiojs.create(elm)[0];
+            }
+        }
+
+        function _createAudioElm (path) {
+            var elm = $('<audio>');
+            elm.attr({
+                'preload': 'auto',
+                'src': path
+            });
+            $('footer').append(elm);
+            return elm;
         }
 
         return api;
     };
-})();
+});
